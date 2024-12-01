@@ -20,4 +20,10 @@
     <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Nemocnice.application\Nemocnice.application.csproj" />
+    <ProjectReference Include="..\Nemocnice.domain\Nemocnice.domain.csproj" />
+    <ProjectReference Include="..\Nemocnice.infrastructure\Nemocnice.infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
