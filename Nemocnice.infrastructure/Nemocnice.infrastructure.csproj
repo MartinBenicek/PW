@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Nemocnice.domain\Nemocnice.domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NováSložka\" />
+  </ItemGroup>
+
 </Project>
