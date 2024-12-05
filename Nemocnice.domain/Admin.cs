@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nemocnice.domain
 {
+    [Table(nameof(Admin))]
     public class Admin
     {
         [Key]

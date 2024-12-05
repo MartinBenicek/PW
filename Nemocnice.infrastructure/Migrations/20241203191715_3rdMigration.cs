@@ -5,7 +5,7 @@
 namespace Nemocnice.infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class second : Migration
+    public partial class _3rdMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

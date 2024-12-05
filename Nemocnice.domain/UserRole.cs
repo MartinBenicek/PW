@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nemocnice.domain
 {
+    [Table(nameof(UserRole))]
     public class UserRole
     {
         [Key]

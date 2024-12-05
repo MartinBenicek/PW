@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nemocnice.domain
 {
+    [Table(nameof(LekarskeSluzby))]
     public class LekarskeSluzby
     {
         [Key]
@@ -22,8 +23,6 @@ namespace Nemocnice.domain
 
         [ForeignKey(nameof(Karta))]
         public int KartaID { get; set; }
-
-
 
         DateTime DateOfBirth { get; set; }
 
