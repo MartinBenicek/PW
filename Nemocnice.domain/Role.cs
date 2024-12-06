@@ -13,6 +13,6 @@ namespace Nemocnice.domain
     {
         [Key]
         public int Id { get; set; }
-        string? Name { get; set; }
+        public string? Nazev { get; set; }
     }
 }

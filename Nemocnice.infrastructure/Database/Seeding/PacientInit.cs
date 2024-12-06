@@ -1,29 +1,25 @@
-using Nemocnice.domain.Entities;
-using System.Collections.Generic;
+using Nemocnice.domain;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
     internal class PacientInit
     {
-        public IList<Pacient> GetPacients(IList<Karta> karty, IList<UserRole> userRoles, IList<User> users)
+        public IList<Pacient> GetPacients()
         {
-            IList<Pacient> pacienti = new List<Pacient>();
+            IList<Pacient> pacients = new List<Pacient>();
 
-
-            pacienti.Add(new Pacient()
+            pacients.Add(new Pacient()
             {
-                PacientID = 1,
-                UserRoleID = userRoles.First(ur => ur.Nazev == "Pacient").UserRoleID,
-                UserID = users.First(u => u.Jmeno == "Marie" && u.Prijmeni == "Nováková").UserID
+                Id = 1,
+                UserRoleID = 1
             });
-            doktori.Add(new Pacient()
+            pacients.Add(new Pacient()
             {
-                PacientID = 2,
-                UserRoleID = userRoles.First(ur => ur.Nazev == "Pacient").UserRoleID,
-                UserID = users.First(u => u.Jmeno == "Martin" && u.Prijmeni == "Bzducha").UserID
+                Id = 2,
+                UserRoleID = 2
             });
 
-            return doktori;
+            return pacients;
         }
     }
 }

@@ -1,5 +1,4 @@
-using Nemocnice.domain.Entities; 
-using System.Collections.Generic;
+using Nemocnice.domain; 
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
@@ -10,7 +9,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             IList<User> users = new List<User>();
             users.Add(new User()
             {
-                UserID = 1,
+                Id = 1,
                 Jmeno = "Marie",
                 Prijmeni = "Kuèerová",
                 Email = "marie.kucerova@example.com",
@@ -20,7 +19,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             });
             users.Add(new User()
             {
-                UserID = 2,
+                Id = 2,
                 Jmeno = "Jakub",
                 Prijmeni = "Malý",
                 Email = "jakub.maly@example.com",
@@ -30,7 +29,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             });
             users.Add(new User()
             {
-                UserID = 1001,
+                Id = 3,
                 Jmeno = "Marie",
                 Prijmeni = "Nováková",
                 Email = "marie.novakova@example.com",
@@ -40,7 +39,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             });
             users.Add(new User()
             {
-                UserID = 1002,
+                Id = 4,
                 Jmeno = "Martin",
                 Prijmeni = "Bzducha",
                 Email = "martin.bzducha@example.com",

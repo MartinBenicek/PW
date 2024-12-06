@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Nemocnice.infrastructure;
+using Nemocnice.infrastructure.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 

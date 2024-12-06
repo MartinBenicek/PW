@@ -1,5 +1,4 @@
-using Nemocnice.domain.Entities;  
-using System.Collections.Generic;
+using Nemocnice.domain;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
@@ -7,13 +6,13 @@ namespace Nemocnice.Infrastructure.Database.Seeding
     {
         public IList<Role> GetRoles()
         {
-            return new List<Role>
-            {
-                new Role { RoleID = 1, Nazev = "Lékaø" },
-                new Role { RoleID = 2, Nazev = "Sestra" },
-                new Role { RoleID = 3, Nazev = "Recepèní" }  
-                
-            };
+            IList<Role> roles = new List<Role>();
+
+            roles.Add(new Role() { Id = 1, Nazev = "Pacient" });
+            roles.Add(new Role() { Id = 2, Nazev = "Doktor" });
+            roles.Add(new Role() { Id = 3, Nazev = "Admin" });
+           
+            return roles;
         }
     }
 }

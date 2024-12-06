@@ -13,12 +13,12 @@ namespace Nemocnice.domain
     {
         [Key]
         public int Id { get; set; }
-        string? Jmeno { get; set; }
-        string? Prijmeni { get; set; }
-        string? Email { get; set; }
-        string? Telefon { get; set; }
-        string? Heslo { get; set; }
-        DateTime DateOfBirth { get; set; }
+        public string? Jmeno { get; set; }
+        public string? Prijmeni { get; set; }
+        public string? Email { get; set; }
+        public string? Telefon { get; set; }
+        public string? Heslo { get; set; }
+        public DateTime DatumNarozeni { get; set; }
 
     }
 }

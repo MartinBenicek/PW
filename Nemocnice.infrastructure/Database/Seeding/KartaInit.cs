@@ -1,5 +1,4 @@
-using Nemocnice.domain.Entities;  
-using System.Collections.Generic;
+using Nemocnice.domain;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
@@ -7,26 +6,12 @@ namespace Nemocnice.Infrastructure.Database.Seeding
     {
         public IList<Karta> GetKartas()
         {
-            IList<Karta> karty = new List<Karta>
-            {
-                new Karta
-                {
-                    KartalID = 1,
-                    Stav = "Aktivní",
-                    LSID = 1,  
-                    PacientID = 1001  
-                },
-                new Karta
-                {
-                    KartalID = 2,
-                    Stav = "Neaktivní",
-                    LSID = 2,  
-                    PacientID = 1002  
-                }  
-                
-            };
+            IList<Karta> kartas = new List<Karta>();
 
-            return karty;
+            kartas.Add(new Karta() { Id = 1, Stav = "Následuje", PacientID = 1, LekarskeSluzbyID = 1 });
+            kartas.Add(new Karta() { Id = 2, Stav = "Následuje", PacientID = 2, LekarskeSluzbyID = 2 });
+            
+            return kartas;
         }
     }
 }

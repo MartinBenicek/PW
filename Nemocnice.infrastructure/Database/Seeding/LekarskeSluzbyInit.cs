@@ -1,34 +1,16 @@
-using Nemocnice.domain.Entities;  
-using System.Collections.Generic;
+using Nemocnice.domain;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
     internal class LekarskeSluzbyInit
     {
-        public IList<LekarskaSluzba> GetLekarskeSluzby()
+        public IList<LekarskeSluzby> GetLekarskeSluzby()
         {
-            IList<LekarskaSluzba> lekarskeSluzby = new List<LekarskaSluzba>
-            {
-                new LekarskaSluzba
-                {
-                    LSID = 1,
-                    Ukon = "Vyšetøení oèí",
-                    Vystaveni = "Kompletní vyšetøení zraku",
-                    Ockovani = "Žádné",
-                    Datum = new DateTime(2024, 1, 10),
-                    OrdinaceID = 1  
-                },
-                new LekarskaSluzba
-                {
-                    LSID = 2,
-                    Ukon = "Oèkování",
-                    Vystaveni = "Oèkování proti chøipce",
-                    Ockovani = "Ano",
-                    Datum = new DateTime(2024, 1, 15),
-                    OrdinaceID = 1   
-                }  
-                
-            };
+            IList<LekarskeSluzby> lekarskeSluzby = new List<LekarskeSluzby>();
+
+            lekarskeSluzby.Add(new LekarskeSluzby() { Id = 1, Ockovani = "", Vysetreni = "Noha", Ukon = "Léèba", KartaID = 1, OrdinaceID = 1 });
+            lekarskeSluzby.Add(new LekarskeSluzby() { Id = 2, Ockovani = "Encefalitida", Vysetreni = "", Ukon = "Léèba", KartaID = 1, OrdinaceID = 2 });
+            lekarskeSluzby.Add(new LekarskeSluzby() { Id = 3, Ockovani = "", Vysetreni = "Ruka", Ukon = "Léèba", KartaID = 2, OrdinaceID = 3 });
 
             return lekarskeSluzby;
         }

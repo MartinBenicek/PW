@@ -1,19 +1,16 @@
-using Nemocnice.domain.Entities;  
-using System.Collections.Generic;
+using Nemocnice.domain;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
     internal class TitulInit
     {
-        public IList<Titul> GetTituly()
+        public IList<Titul> GetTituls()
         {
-            return new List<Titul>
-            {
-                new Titul { Id = 1, Nazev = "MUDr." },
-                new Titul { Id = 2, Nazev = "Bc." },
-                new Titul { Id = 3, Nazev = "Ph.D." }  
-                 
-            };
+            IList<Titul> tituls = new List<Titul>();
+
+            tituls.Add(new Titul() { Id = 1, titul = "MUDr" });
+
+            return tituls;
         }
     }
 }
