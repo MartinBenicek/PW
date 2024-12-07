@@ -1,0 +1,55 @@
+﻿@model IList<Patient>
+
+@{
+    ViewData["Title"] = "Hospital Administration";
+}
+<h1>@ViewData["Title"]</h1>
+
+<a asp-action="Create">Create Pacient</a>
+
+@{
+    if (Model != null && Model.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">@nameof(Pacient.Id)</th>
+                    <th scope="col">@nameof(Pacient.Jmeno)</th>
+                    <th scope="col">@nameof(Pacient.Prijmeni)</th>
+                    <th scope="col">@nameof(Pacient.Email)</th>
+                    <th scope="col">@nameof(Pacient.Telefon)</th>
+                    <th scope="col">@nameof(Pacient.Heslo)</th>
+                    <th scope="col">@nameof(Pacient.DatumNarozeni)</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for (int i = 0; i < Model.Count; ++i)
+                {
+                    Pacient pacient = Model[i];
+                    <tr>
+                        <th scope="row">@pacient.Id</th>
+                        <td>@pacient.Jmeno</td>
+                        <td>@pacient.Prijmeni</td>
+                        <td>@pacient.Email</td>
+                        <td>@pacient.Telefon</td>
+                        <td>@pacient.Heslo</td>
+                        <td>@pacient.DatumNarozeni.ToString("d")</td>
+                        <td><a asp-action="Delete" asp-route-id="@patient.Id" onclick="return ConfirmDelete();">Delete</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Pacient table is empty!</p>
+    }
+}
+
+@section Scripts
+{
+    <script src="~/js/dialogs.js"></script>
+}

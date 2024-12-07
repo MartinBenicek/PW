@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Nemocnice.infrastructure.Database;
+using Nemocnice.application.Abstraction;
+using Nemocnice.application.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,9 @@ builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("MySQL");
 ServerVersion serverVersion = new MySqlServerVersion("8.0.40");
 builder.Services.AddDbContext<NemocniceDbContext>(optionsBuilder => optionsBuilder.UseMySql(connectionString, serverVersion));
+
+//registrace služeb aplikaèní vrstvy
+builder.Services.AddScoped<IPacientAppService, PacientAppService>();
 
 var app = builder.Build();
 
@@ -30,6 +35,10 @@ app.UseAuthorization();/*
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?)");*/
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
