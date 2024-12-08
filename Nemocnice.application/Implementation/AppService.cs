@@ -19,23 +19,23 @@ namespace Nemocnice.application.Implementation
             _nemocniceDbContext = nemocniceDbContext;
         }
 
-        public IList<Pacient> Select()
+        public IList<User> Select()
         {
-            return _nemocniceDbContext.Pacient.ToList();
+            return _nemocniceDbContext.User.ToList();
         }
-        public void Create(Pacient pacient)
+        public void Create(User pacient)
         {
-            _nemocniceDbContext.Pacient.Add(pacient);
+            _nemocniceDbContext.User.Add(pacient);
             _nemocniceDbContext.SaveChanges();
         }
         public bool Delete(int id)
         {
             bool deleted = false;
-            Pacient? pacient
-                = _nemocniceDbContext.Pacient.FirstOrDefault(prod => prod.Id == id);
+            User? pacient
+                = _nemocniceDbContext.User.FirstOrDefault(prod => prod.Id == id);
             if (pacient != null)
             {
-                _nemocniceDbContext.Pacient.Remove(pacient);
+                _nemocniceDbContext.User.Remove(pacient);
                 _nemocniceDbContext.SaveChanges();
                 deleted = true;
             }

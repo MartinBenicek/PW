@@ -16,7 +16,7 @@ namespace Nemocnice.Areas.Admin.Controllers
         }
         public IActionResult Select()
         {
-            IList<Pacient> pacient = _pacientAppService.Select();
+            IList<User> pacient = _pacientAppService.Select();
             return View(pacient);
         }
 
@@ -26,7 +26,7 @@ namespace Nemocnice.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Pacient pacient)
+        public IActionResult Create(User pacient)
         {
             _pacientAppService.Create(pacient);
             return RedirectToAction(nameof(PacientController.Select));

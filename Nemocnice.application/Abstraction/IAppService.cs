@@ -9,8 +9,8 @@ namespace Nemocnice.application.Abstraction
 {
     public interface IPacientAppService
     {
-        IList<Pacient> Select();
-        void Create(Pacient pacient);
+        IList<User> Select();
+        void Create(User pacient);
         bool Delete(int id);
     }
 }
