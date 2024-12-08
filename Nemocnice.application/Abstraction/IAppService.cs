@@ -10,5 +10,7 @@ namespace Nemocnice.application.Abstraction
     public interface IPacientAppService
     {
         IList<Pacient> Select();
+        void Create(Pacient pacient);
+        bool Delete(int id);
     }
 }

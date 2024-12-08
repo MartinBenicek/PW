@@ -23,5 +23,23 @@ namespace Nemocnice.application.Implementation
         {
             return _nemocniceDbContext.Pacient.ToList();
         }
+        public void Create(Pacient pacient)
+        {
+            _nemocniceDbContext.Pacient.Add(pacient);
+            _nemocniceDbContext.SaveChanges();
+        }
+        public bool Delete(int id)
+        {
+            bool deleted = false;
+            Pacient? pacient
+                = _nemocniceDbContext.Pacient.FirstOrDefault(prod => prod.Id == id);
+            if (pacient != null)
+            {
+                _nemocniceDbContext.Pacient.Remove(pacient);
+                _nemocniceDbContext.SaveChanges();
+                deleted = true;
+            }
+            return deleted;
+        }
     }
 }

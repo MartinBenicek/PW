@@ -19,5 +19,28 @@ namespace Nemocnice.Areas.Admin.Controllers
             IList<Pacient> pacient = _pacientAppService.Select();
             return View(pacient);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Pacient pacient)
+        {
+            _pacientAppService.Create(pacient);
+            return RedirectToAction(nameof(PacientController.Select));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            bool deleted = _pacientAppService.Delete(id);
+            if (deleted)
+            {
+                return RedirectToAction(nameof(PacientController.Select));
+            }
+            else
+                return NotFound();
+        }
     }
 }
