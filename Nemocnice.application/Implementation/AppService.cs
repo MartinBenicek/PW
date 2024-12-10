@@ -9,12 +9,12 @@ using Nemocnice.infrastructure.Database;
 
 namespace Nemocnice.application.Implementation
 {
-    public class PacientAppService : IPacientAppService
+    public class UserAppService : IUserAppService
     {
         NemocniceDbContext _nemocniceDbContext;
 
 
-        public PacientAppService(NemocniceDbContext nemocniceDbContext)
+        public UserAppService(NemocniceDbContext nemocniceDbContext)
         {
             _nemocniceDbContext = nemocniceDbContext;
         }

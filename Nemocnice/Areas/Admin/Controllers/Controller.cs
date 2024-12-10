@@ -5,19 +5,19 @@ using Nemocnice.application.Abstraction;
 namespace Nemocnice.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class PacientController : Controller
+    public class UserController : Controller
     {
 
-        IPacientAppService _pacientAppService;
+        IUserAppService _userAppService;
 
-        public PacientController(IPacientAppService pacientAppService)
+        public UserController(IUserAppService pacientAppService)
         {
-            _pacientAppService = pacientAppService;
+            _userAppService = pacientAppService;
         }
         public IActionResult Select()
         {
-            IList<User> pacient = _pacientAppService.Select();
-            return View(pacient);
+            IList<User> user = _userAppService.Select();
+            return View(user);
         }
 
         [HttpGet]
@@ -26,18 +26,18 @@ namespace Nemocnice.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(User pacient)
+        public IActionResult Create(User user)
         {
-            _pacientAppService.Create(pacient);
-            return RedirectToAction(nameof(PacientController.Select));
+            _userAppService.Create(user);
+            return RedirectToAction(nameof(UserController.Select));
         }
 
         public IActionResult Delete(int id)
         {
-            bool deleted = _pacientAppService.Delete(id);
+            bool deleted = _userAppService.Delete(id);
             if (deleted)
             {
-                return RedirectToAction(nameof(PacientController.Select));
+                return RedirectToAction(nameof(UserController.Select));
             }
             else
                 return NotFound();

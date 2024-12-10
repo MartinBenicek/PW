@@ -7,10 +7,10 @@ using Nemocnice.domain;
 
 namespace Nemocnice.application.Abstraction
 {
-    public interface IPacientAppService
+    public interface IUserAppService
     {
         IList<User> Select();
-        void Create(User pacient);
+        void Create(User user);
         bool Delete(int id);
     }
 }

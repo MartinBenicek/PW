@@ -2,10 +2,11 @@
 
 @{
     ViewData["Title"] = "Hospital Administration";
+    var myUser = new User();
 }
 <h1>@ViewData["Title"]</h1>
 
-<a asp-action="Create">Create Pacient</a>
+<a asp-action="Create">Create User</a>
 
 @{
     if (Model != null && Model.Count > 0)
@@ -13,13 +14,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">@nameof(User.Id)</th>
-                    <th scope="col">@nameof(User.Jmeno)</th>
-                    <th scope="col">@nameof(User.Prijmeni)</th>
-                    <th scope="col">@nameof(User.Email)</th>
-                    <th scope="col">@nameof(User.Telefon)</th>
-                    <th scope="col">@nameof(User.Heslo)</th>
-                    <th scope="col">@nameof(User.DatumNarozeni)</th>
+                    <th scope="col">@nameof(myUser.Id)</th>
+                    <th scope="col">@nameof(myUser.Jmeno)</th>
+                    <th scope="col">@nameof(myUser.Prijmeni)</th>
+                    <th scope="col">@nameof(myUser.Email)</th>
+                    <th scope="col">@nameof(myUser.Telefon)</th>
+                    <th scope="col">@nameof(myUser.Heslo)</th>
+                    <th scope="col">@nameof(myUser.DatumNarozeni)</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -27,16 +28,16 @@
 
                 @for (int i = 0; i < Model.Count; ++i)
                 {
-                    User pacient = Model[i];
+                    User user = Model[i];
                     <tr>
-                        <th scope="row">@pacient.Id</th>
-                        <td>@pacient.Jmeno</td>
-                        <td>@pacient.Prijmeni</td>
-                        <td>@pacient.Email</td>
-                        <td>@pacient.Telefon</td>
-                        <td>@pacient.Heslo</td>
-                        <td>@pacient.DatumNarozeni.ToShortDateString()</td>
-                        <td><a asp-action="Delete" asp-route-id="@pacient.Id" onclick="return ConfirmDelete();">Delete</a></td>
+                        <th scope="row">@user.Id</th>
+                        <td>@user.Jmeno</td>
+                        <td>@user.Prijmeni</td>
+                        <td>@user.Email</td>
+                        <td>@user.Telefon</td>
+                        <td>@user.Heslo</td>
+                        <td>@user.DatumNarozeni.ToShortDateString()</td>
+                        <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td>
                     </tr>
                 }
 

@@ -13,7 +13,7 @@ ServerVersion serverVersion = new MySqlServerVersion("8.0.40");
 builder.Services.AddDbContext<NemocniceDbContext>(optionsBuilder => optionsBuilder.UseMySql(connectionString, serverVersion));
 
 //registrace služeb aplikaèní vrstvy
-builder.Services.AddScoped<IPacientAppService, PacientAppService>();
+builder.Services.AddScoped<IUserAppService, UserAppService>();
 
 var app = builder.Build();
 
