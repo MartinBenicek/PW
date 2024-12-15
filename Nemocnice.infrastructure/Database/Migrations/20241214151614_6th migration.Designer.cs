@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nemocnice.infrastructure.Database;
 
@@ -11,9 +12,11 @@ using Nemocnice.infrastructure.Database;
 namespace Nemocnice.infrastructure.Migrations
 {
     [DbContext(typeof(NemocniceDbContext))]
-    partial class NemocniceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241214151614_6th migration")]
+    partial class _6thmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Nemocnice.infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.Admin", b =>
+            modelBuilder.Entity("Nemocnice.domain.Admin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,16 +48,13 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.Doktor", b =>
+            modelBuilder.Entity("Nemocnice.domain.Doktor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Titul")
-                        .HasColumnType("longtext");
 
                     b.Property<int>("TitulID")
                         .HasColumnType("int");
@@ -70,13 +70,12 @@ namespace Nemocnice.infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Titul = "MUDr",
-                            TitulID = 0,
+                            TitulID = 1,
                             UserRoleID = 3
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.Karta", b =>
+            modelBuilder.Entity("Nemocnice.domain.Karta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,7 +113,7 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.LekarskeSluzby", b =>
+            modelBuilder.Entity("Nemocnice.domain.LekarskeSluzby", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,7 +170,7 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.Ordinace", b =>
+            modelBuilder.Entity("Nemocnice.domain.Ordinace", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +215,7 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.Pacient", b =>
+            modelBuilder.Entity("Nemocnice.domain.Pacient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -244,7 +243,7 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.Role", b =>
+            modelBuilder.Entity("Nemocnice.domain.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +276,30 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.User", b =>
+            modelBuilder.Entity("Nemocnice.domain.Titul", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("titul")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Titul");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            titul = "MUDr"
+                        });
+                });
+
+            modelBuilder.Entity("Nemocnice.domain.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -350,7 +372,7 @@ namespace Nemocnice.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nemocnice.domain.Entities.UserRole", b =>
+            modelBuilder.Entity("Nemocnice.domain.UserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

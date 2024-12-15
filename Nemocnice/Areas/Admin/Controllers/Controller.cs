@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nemocnice.domain;
 using Nemocnice.application.Abstraction;
+using Nemocnice.domain.Entities;
 
 namespace Nemocnice.Areas.Admin.Controllers
 {
@@ -10,9 +10,9 @@ namespace Nemocnice.Areas.Admin.Controllers
 
         IUserAppService _userAppService;
 
-        public UserController(IUserAppService pacientAppService)
+        public UserController(IUserAppService userAppService)
         {
-            _userAppService = pacientAppService;
+            _userAppService = userAppService;
         }
         public IActionResult Select()
         {

@@ -1,4 +1,4 @@
-using Nemocnice.domain;
+using Nemocnice.domain.Entities;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
@@ -11,7 +11,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             doktors.Add(new Doktor()
             {
                 Id = 1,
-                TitulID = 1,
+                Titul = "MUDr",
                 UserRoleID = 3,
             });
 

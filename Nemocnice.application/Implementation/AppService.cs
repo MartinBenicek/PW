@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nemocnice.application.Abstraction;
-using Nemocnice.domain;
+using Nemocnice.domain.Entities;
 using Nemocnice.infrastructure.Database;
 
 namespace Nemocnice.application.Implementation

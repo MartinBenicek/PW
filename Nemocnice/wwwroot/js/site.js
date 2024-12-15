@@ -3,6 +3,6 @@
 
 // Write your JavaScript code.
 
-function ConfirmDelete() {
+const ConfirmDelete = () => {
     return confirm("Are you sure?");
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nemocnice.domain;
+using Nemocnice.domain.Entities;
 using Nemocnice.Infrastructure.Database.Seeding;
 
 namespace Nemocnice.infrastructure.Database
@@ -13,7 +13,6 @@ namespace Nemocnice.infrastructure.Database
         public DbSet<Ordinace> Ordinace { get; set; }
         public DbSet<Pacient> Pacient { get; set; }
         public DbSet<Role> Role { get; set; }
-        public DbSet<Titul> Titul { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public NemocniceDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
@@ -21,34 +20,31 @@ namespace Nemocnice.infrastructure.Database
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var userInit = new UserInit();
+            UserInit userInit = new UserInit();
             modelBuilder.Entity<User>().HasData(userInit.GetUsers());
 
-            var rolesInit = new RoleInit();
+            RoleInit rolesInit = new RoleInit();
             modelBuilder.Entity<Role>().HasData(rolesInit.GetRoles());
 
-            var userRolesInit = new UserRoleInit();
+            UserRoleInit userRolesInit = new UserRoleInit();
             modelBuilder.Entity<UserRole>().HasData(userRolesInit.GetUserRoles());
 
-            var titulsInit = new TitulInit();
-            modelBuilder.Entity<Titul>().HasData(titulsInit.GetTituls());
-
-            var pacientsInit = new PacientInit();
+            PacientInit pacientsInit = new PacientInit();
             modelBuilder.Entity<Pacient>().HasData(pacientsInit.GetPacients());
 
-            var doktorsInit = new DoktorInit();
+            DoktorInit doktorsInit = new DoktorInit();
             modelBuilder.Entity<Doktor>().HasData(doktorsInit.GetDoktors());
 
-            var adminsInit = new AdminInit();
+            AdminInit adminsInit = new AdminInit();
             modelBuilder.Entity<Admin>().HasData(adminsInit.GetAdmins());
 
-            var kartasInit = new KartaInit();
+            KartaInit kartasInit = new KartaInit();
             modelBuilder.Entity<Karta>().HasData(kartasInit.GetKartas());
 
-            var ordinaceInit = new OrdinaceInit();
+            OrdinaceInit ordinaceInit = new OrdinaceInit();
             modelBuilder.Entity<Ordinace>().HasData(ordinaceInit.GetOrdinaces());
 
-            var lekarskeSluzbyInit = new LekarskeSluzbyInit();
+            LekarskeSluzbyInit lekarskeSluzbyInit = new LekarskeSluzbyInit();
             modelBuilder.Entity<LekarskeSluzby>().HasData(lekarskeSluzbyInit.GetLekarskeSluzby());
         }
     }

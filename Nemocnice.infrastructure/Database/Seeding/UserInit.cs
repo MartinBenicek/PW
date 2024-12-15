@@ -1,4 +1,4 @@
-using Nemocnice.domain; 
+using Nemocnice.domain.Entities;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
