@@ -17,8 +17,5 @@ namespace Nemocnice.domain.Entities
 
         public string? Titul {  get; set; }
 
-        [ForeignKey(nameof(UserRole))]
-        public int UserRoleID { get; set; }
-
     }
 }

@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Nemocnice.infrastructure.Database;
 using Nemocnice.application.Abstraction;
 using Nemocnice.application.Implementation;
+using Microsoft.AspNetCore.Identity;
+using Nemocnice.infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,11 @@ builder.Services.AddControllersWithViews();
 string connectionString = builder.Configuration.GetConnectionString("MySQL");
 ServerVersion serverVersion = new MySqlServerVersion("8.0.40");
 builder.Services.AddDbContext<NemocniceDbContext>(optionsBuilder => optionsBuilder.UseMySql(connectionString, serverVersion));
+
+
+builder.Services.AddIdentity<User, Role>()
+     .AddEntityFrameworkStores<NemocniceDbContext>()
+     .AddDefaultTokenProviders();
 
 //registrace služeb aplikaèní vrstvy
 builder.Services.AddScoped<IUserAppService, UserAppService>();

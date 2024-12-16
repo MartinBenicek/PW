@@ -14,9 +14,5 @@ namespace Nemocnice.domain.Entities
     {
         [Key]
         public int Id { get; set; }
-
-        [ForeignKey(nameof(UserRole))]
-        public int UserRoleID { get; set; }
-
     }
 }

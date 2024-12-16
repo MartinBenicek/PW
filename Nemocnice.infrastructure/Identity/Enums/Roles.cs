@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nemocnice.domain.Entities.Interfaces
+namespace Nemocnice.infrastructure.Identity.Enums
 {
-    public interface IEntity<TKey>
+    public enum Roles
     {
-        TKey Id { get; set; }
+        Admin,
+        Doktor,
+        Pacient
     }
 }

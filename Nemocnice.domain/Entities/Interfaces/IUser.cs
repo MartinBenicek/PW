@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Nemocnice.domain.Entities.Interfaces
 {
-    internal interface IUser<TKey> : IEntity<TKey>
+    public interface IUser<TKey> : IEntity<TKey>
     {
-        public string? Jmeno { get; set; }
-        public string? Prijmeni { get; set; }
-        public string? Email { get; set; }
-        public string? Telefon { get; set; }
-        public string? Heslo { get; set; }
-        public DateTime DatumNarozeni { get; set; }
-        public string? role { get; set; }
+        string? UserName { get; set; }
+        string? Email { get; set; }
+        string? PhoneNumber { get; set; }
+        string? FirstName { get; set; }
+        string? LastName { get; set; }
     }
 }
