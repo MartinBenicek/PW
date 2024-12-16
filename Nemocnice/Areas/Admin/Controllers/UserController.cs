@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Nemocnice.application.Abstraction;
 using Nemocnice.infrastructure.Identity;
+using Nemocnice.infrastructure.Identity.Enums;
 
 namespace Nemocnice.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doktor))]
     public class UserController : Controller
     {
 

@@ -29,7 +29,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Select">Administration</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Admin)) || User.IsInRole(nameof(Roles.Doktor))))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Select">Products</a>
+                            </li>
+                        }
                     </ul>
+                    @{
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <ul class="navbar-nav navbar-right">
+                                <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Register"><i class="bi bi-person-plus"></i> Register</a></li>
+                                <li class="nav-item"><a class="nav-link text-dark" asp-area="Security" asp-controller="Account" asp-action="Login"><i class="bi bi-lock"></i> Login</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i> Logged as @User.Identity.Name</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item text-dark" asp-area="Security" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right me-1"></i> Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                    }
                 </div>
             </div>
         </nav>

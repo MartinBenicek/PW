@@ -1,6 +1,17 @@
-﻿namespace Nemocnice.Areas.Doktor.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace Nemocnice.Areas.Doktor.Controllers
 {
-    public class Controller
+    [Area("Doktor")]
+    public class DoktorController : Controller
     {
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
     }
 }

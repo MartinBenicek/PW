@@ -10,7 +10,5 @@ namespace Nemocnice.application.Abstraction
     public interface IKartaService
     {
         IList<Karta> Select();
-        void Create(Karta karta);
-        bool Delete(int id);
     }
 }

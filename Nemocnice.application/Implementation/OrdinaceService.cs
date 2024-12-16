@@ -10,20 +10,19 @@ using Nemocnice.infrastructure.Database;
 
 namespace Nemocnice.application.Implementation
 {
-    public class OrdinaceService
+   
+    public class OrdinaceAppService : IOrdinaceService
     {
-        public class OrdinaceAppService : IOrdinaceService
+        NemocniceDbContext _NemocniceDbContext;
+        public OrdinaceAppService(NemocniceDbContext NemocniceDbContext)
         {
-            NemocniceDbContext _NemocniceDbContext;
-            public OrdinaceAppService(NemocniceDbContext NemocniceDbContext)
-            {
-                _NemocniceDbContext = NemocniceDbContext;
-            }
+            _NemocniceDbContext = NemocniceDbContext;
+        }
 
-            public IList<Ordinace> Select()
-            {
-                return _NemocniceDbContext.Ordinace.ToList();
-            }
+        public IList<Ordinace> Select()
+        {
+            return _NemocniceDbContext.Ordinace.ToList();
         }
     }
+    
 }

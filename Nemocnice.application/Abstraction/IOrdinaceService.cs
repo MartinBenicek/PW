@@ -10,7 +10,5 @@ namespace Nemocnice.application.Abstraction
     public interface IOrdinaceService
     {
         IList<Ordinace> Select();
-        void Create(Ordinace ordinace);
-        bool Delete(int id);
     }
 }
