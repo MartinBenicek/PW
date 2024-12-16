@@ -17,6 +17,16 @@ namespace Nemocnice.infrastructure.Database
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            KartaInit kartasInit = new KartaInit();
+            modelBuilder.Entity<Karta>().HasData(kartasInit.GetKartas());
+
+            OrdinaceInit ordinaceInit = new OrdinaceInit();
+            modelBuilder.Entity<Ordinace>().HasData(ordinaceInit.GetOrdinaces());
+
+            LekarskeSluzbyInit lekarskeSluzbyInit = new LekarskeSluzbyInit();
+            modelBuilder.Entity<LekarskeSluzby>().HasData(lekarskeSluzbyInit.GetLekarskeSluzby());
+
             RoleInit rolesInit = new RoleInit();
             modelBuilder.Entity<Role>().HasData(rolesInit.GetRolesAMC());
 
@@ -26,20 +36,11 @@ namespace Nemocnice.infrastructure.Database
 
             modelBuilder.Entity<User>().HasData(admin, manager);
 
-            UserRoleInit userRolesInit = new UserRoleInit();
-            List<IdentityUserRole<int>> adminUserRoles = userRolesInit.GetRolesForAdmin();
-            List<IdentityUserRole<int>> managerUserRoles = userRolesInit.GetRolesForManager();
-            modelBuilder.Entity<IdentityUserRole<int>>().HasData(adminUserRoles);
-            modelBuilder.Entity<IdentityUserRole<int>>().HasData(managerUserRoles);
-
-            KartaInit kartasInit = new KartaInit();
-            modelBuilder.Entity<Karta>().HasData(kartasInit.GetKartas());
-
-            OrdinaceInit ordinaceInit = new OrdinaceInit();
-            modelBuilder.Entity<Ordinace>().HasData(ordinaceInit.GetOrdinaces());
-
-            LekarskeSluzbyInit lekarskeSluzbyInit = new LekarskeSluzbyInit();
-            modelBuilder.Entity<LekarskeSluzby>().HasData(lekarskeSluzbyInit.GetLekarskeSluzby());
+            UserRoleInit userRoleInit = new UserRoleInit();
+            List<IdentityUserRole<int>> adminUserRole = userRoleInit.GetRolesForAdmin();
+            List<IdentityUserRole<int>> DoktorUserRole = userRoleInit.GetRolesForDoktor();
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(userRoleInit.GetRolesForAdmin());
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(userRoleInit.GetRolesForDoktor());
         }
     }
 

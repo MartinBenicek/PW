@@ -14,7 +14,9 @@ namespace Nemocnice.domain.Entities
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string? Budova { get; set; }
+        [Required]
         public string? Mistnost { get; set; }
 
         [ForeignKey(nameof(Doktor))]

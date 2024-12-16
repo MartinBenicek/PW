@@ -21,6 +21,7 @@ builder.Services.AddIdentity<User, Role>()
 
 //registrace služeb aplikaèní vrstvy
 builder.Services.AddScoped<IUserAppService, UserAppService>();
+builder.Services.AddScoped<ILekarskeSluzbyService, LekarskeSluzbyAppService>();
 
 var app = builder.Build();
 
@@ -38,10 +39,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();/*
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?)");*/
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "areas",

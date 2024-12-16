@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nemocnice.application.Abstraction;
-using Nemocnice.domain.Entities;
+using Nemocnice.infrastructure.Identity;
 using Nemocnice.infrastructure.Database;
 
 namespace Nemocnice.application.Implementation
@@ -21,21 +21,21 @@ namespace Nemocnice.application.Implementation
 
         public IList<User> Select()
         {
-            return _nemocniceDbContext.User.ToList();
+            return _nemocniceDbContext.Users.ToList();
         }
-        public void Create(User pacient)
+        public void Create(User user)
         {
-            _nemocniceDbContext.User.Add(pacient);
+            _nemocniceDbContext.Users.Add(user);
             _nemocniceDbContext.SaveChanges();
         }
         public bool Delete(int id)
         {
             bool deleted = false;
             User? pacient
-                = _nemocniceDbContext.User.FirstOrDefault(prod => prod.Id == id);
+                = _nemocniceDbContext.Users.FirstOrDefault(prod => prod.Id == id);
             if (pacient != null)
             {
-                _nemocniceDbContext.User.Remove(pacient);
+                _nemocniceDbContext.Users.Remove(pacient);
                 _nemocniceDbContext.SaveChanges();
                 deleted = true;
             }

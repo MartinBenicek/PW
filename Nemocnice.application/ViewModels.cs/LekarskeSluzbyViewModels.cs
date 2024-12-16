@@ -10,5 +10,6 @@ namespace Nemocnice.application.ViewModels.cs
     internal class LekarskeSluzbyViewModels
     {
         public IList<LekarskeSluzby>? LekarskeSluzbies { get; set; }
+        public IList<Ordinace>? Ordinaces { get; set; }
     }
 }

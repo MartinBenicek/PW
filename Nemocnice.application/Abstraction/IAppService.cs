@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Nemocnice.domain.Entities;
+using Nemocnice.infrastructure.Identity;
 
 namespace Nemocnice.application.Abstraction
 {

@@ -28,7 +28,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             return adminUserRoles;
         }
 
-        public List<IdentityUserRole<int>> GetRolesForManager()
+        public List<IdentityUserRole<int>> GetRolesForDoktor()
         {
             List<IdentityUserRole<int>> doktorUserRoles = new List<IdentityUserRole<int>>()
             {

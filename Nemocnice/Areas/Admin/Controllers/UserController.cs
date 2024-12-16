@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nemocnice.application.Abstraction;
-using Nemocnice.domain.Entities;
+using Nemocnice.infrastructure.Identity;
 
 namespace Nemocnice.Areas.Admin.Controllers
 {
@@ -28,8 +28,12 @@ namespace Nemocnice.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            _userAppService.Create(user);
-            return RedirectToAction(nameof(UserController.Select));
+            if (ModelState.IsValid)
+            {
+                _userAppService.Create(user);
+                return RedirectToAction(nameof(UserController.Select));
+            }
+            return View(user);
         }
 
         public IActionResult Delete(int id)

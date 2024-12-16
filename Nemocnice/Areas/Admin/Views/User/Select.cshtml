@@ -15,12 +15,11 @@
             <thead>
                 <tr>
                     <th scope="col">@nameof(myUser.Id)</th>
-                    <th scope="col">@nameof(myUser.Jmeno)</th>
-                    <th scope="col">@nameof(myUser.Prijmeni)</th>
+                    <th scope="col">@nameof(myUser.FirstName)</th>
+                    <th scope="col">@nameof(myUser.LastName)</th>
                     <th scope="col">@nameof(myUser.Email)</th>
-                    <th scope="col">@nameof(myUser.Telefon)</th>
-                    <th scope="col">@nameof(myUser.Heslo)</th>
-                    <th scope="col">@nameof(myUser.DatumNarozeni)</th>
+                    <th scope="col">@nameof(myUser.PhoneNumber)</th>
+                    <th scope="col">@nameof(myUser.PasswordHash)</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -31,12 +30,11 @@
                     User user = Model[i];
                     <tr>
                         <th scope="row">@user.Id</th>
-                        <td>@user.Jmeno</td>
-                        <td>@user.Prijmeni</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
                         <td>@user.Email</td>
-                        <td>@user.Telefon</td>
-                        <td>@user.Heslo</td>
-                        <td>@user.DatumNarozeni.ToShortDateString()</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.PasswordHash</td>
                         <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td>
                     </tr>
                 }

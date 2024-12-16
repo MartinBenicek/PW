@@ -5,28 +5,30 @@
 <h1>@ViewData["Title"]</h1>
 <form asp-action="Create" method="post">
     <div class="mb-3">
-        <label class="form-label" asp-for="Jmeno"></label>
-        <input class="form-control" asp-for="Jmeno">
+        <label class="form-label" asp-for="FirstName"></label>
+        <input class="form-control" asp-for="FirstName">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="Prijmeni"></label>
-        <input class="form-control" asp-for="Prijmeni">
+        <label class="form-label" asp-for="LastName"></label>
+        <input class="form-control" asp-for="LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label class="form-label" asp-for="Email"></label>
         <input class="form-control" asp-for="Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="Telefon">Image Source</label>
-        <input class="form-control" asp-for="Telefon">
-    </div>
-    <div class="mb-3">
-        <label class="form-label" asp-for="Heslo"></label>
-        <input class="form-control" asp-for="Heslo">
-    </div>
-    <div class="mb-3">
-        <label class="form-label" asp-for="DatumNarozeni"></label>
-        <input class="form-control" asp-for="DatumNarozeni">
+        <label class="form-label" asp-for="PhoneNumber">Image Source</label>
+        <input class="form-control" asp-for="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form> 
+
+@section Scripts
+{
+        <partial name="_ValidationScriptsPartial" />
+        <script src="~/js/validations/FirstLetterCapitalizedCZ.js"></script>
+}
