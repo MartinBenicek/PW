@@ -1,10 +1,18 @@
 using Nemocnice.domain.Entities;
 using Nemocnice.infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Nemocnice.Infrastructure.Database.Seeding
 {
     internal class UserInit
     {
+        private readonly PasswordHasher<User> _passwordHasher;
+
+        public UserInit()
+        {
+            _passwordHasher = new PasswordHasher<User>();
+        }
+
         public User GetAdmin()
         {
             User admin = new User()
@@ -17,7 +25,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
                 Email = "admin@admin.cz",
                 NormalizedEmail = "ADMIN@ADMIN.CZ",
                 EmailConfirmed = true,
-                PasswordHash = "AQAAAAEAACcQAAAAEM9O98Suoh2o2JOK1ZOJScgOfQ21odn/k6EYUpGWnrbevCaBFFXrNL7JZxHNczhh/w==",
+                PasswordHash = _passwordHasher.HashPassword(null, "admin"),
                 SecurityStamp = "SEJEPXC646ZBNCDYSM3H5FRK5RWP2TN6",
                 ConcurrencyStamp = "b09a83ae-cfd3-4ee7-97e6-fbcf0b0fe78c",
                 PhoneNumber = null,
@@ -42,7 +50,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
                 Email = "doktor@doktor.cz",
                 NormalizedEmail = "DOKTOR@DOKTOR.CZ",
                 EmailConfirmed = true,
-                PasswordHash = "AQAAAAEAACcQAAAAEOzeajp5etRMZn7TWj9lhDMJ2GSNTtljLWVIWivadWXNMz8hj6mZ9iDR+alfEUHEMQ==",
+                PasswordHash = _passwordHasher.HashPassword(null, "manager"),
                 SecurityStamp = "MAJXOSATJKOEM4YFF32Y5G2XPR5OFEL6",
                 ConcurrencyStamp = "7a8d96fd-5918-441b-b800-cbafa99de97b",
                 PhoneNumber = null,
