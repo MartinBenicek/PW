@@ -70,17 +70,34 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = _userAppService.Edit(updatedUser);
+                // Získání existujícího uživatele z databáze
+                var existingUser = _userAppService.GetById(updatedUser.Id);
+
+                if (existingUser == null)
+                {
+                    return NotFound(); 
+                }
+
+                // Aktualizace vlastností uživatele
+                existingUser.FirstName = updatedUser.FirstName;
+                existingUser.LastName = updatedUser.LastName;
+                existingUser.Email = updatedUser.Email;
+                existingUser.PhoneNumber = updatedUser.PhoneNumber;
+
+                // Zavolání služby pro uložení změn
+                bool result = _userAppService.Edit(existingUser);
+
                 if (result)
                 {
-                    return RedirectToAction(nameof(Select)); 
+                    return RedirectToAction(nameof(Select)); // Zpět na seznam
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Update selhal.");
+                    ModelState.AddModelError("", "Update failed. Please try again.");
                 }
             }
-            return View(updatedUser);
+
+            return View(updatedUser); // Vrátit formulář s chybami
         }
 
     }
