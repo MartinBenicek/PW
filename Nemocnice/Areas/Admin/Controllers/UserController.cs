@@ -13,8 +13,11 @@ namespace Nemocnice.Areas.Admin.Controllers
     {
         IUserAppService _userAppService;
 
-        public UserController(IUserAppService userAppService)
+        private readonly UserManager<User> _userManager;
+
+        public UserController(UserManager<User> userManager, IUserAppService userAppService)
         {
+            _userManager = userManager;
             _userAppService = userAppService;
         }
         public IActionResult Select()
@@ -29,17 +32,29 @@ namespace Nemocnice.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(User user)
+        public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
             {
+                // Použití UserManager pro vytvoření uživatele
+                var result = await _userManager.CreateAsync(user, "DefaultPassword123!");
 
-                // Save the user using the application service
-                _userAppService.Create(user);
-
-                return RedirectToAction(nameof(UserController.Select));
+                if (result.Succeeded)
+                {
+                    // Vše je v pořádku, přesměrujeme na seznam uživatelů
+                    return RedirectToAction(nameof(UserController.Select));
+                }
+                else
+                {
+                    // Přidání chyb do ModelState pro zobrazení uživateli
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
             }
-            return View(user);
+
+            return View(user); // Vrácení formuláře v případě chyby
         }
 
         public IActionResult Delete(int id)

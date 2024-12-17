@@ -21,8 +21,8 @@
                         <th scope="col">@nameof(myUser.Email)</th>
                         <th scope="col">@nameof(myUser.PhoneNumber)</th>
                         <th scope="col">@nameof(myUser.PasswordHash)</th>
-                        <th scope="col">Delete</th>
                         <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                             <td>@user.PhoneNumber</td>
                             <td>@user.PasswordHash</td>
                             <td><a asp-action="Edit" asp-route-id="@user.Id">Edit</a></td>
-                            <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td
+                            <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td>
                         </tr>
                     }
 
