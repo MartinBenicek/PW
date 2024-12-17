@@ -23,4 +23,9 @@
     <Folder Include="Areas\Doktor\Views\LekarskeSluzby\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\img\obr2.jpg" />
+    <None Include="wwwroot\img\obr3.png" />
+  </ItemGroup>
+
 </Project>
