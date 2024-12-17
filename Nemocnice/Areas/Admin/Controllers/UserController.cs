@@ -82,6 +82,7 @@ namespace Nemocnice.Areas.Admin.Controllers
                 existingUser.FirstName = updatedUser.FirstName;
                 existingUser.LastName = updatedUser.LastName;
                 existingUser.Email = updatedUser.Email;
+                existingUser.UserName = updatedUser.UserName;
                 existingUser.PhoneNumber = updatedUser.PhoneNumber;
 
                 // Zavolání služby pro uložení změn
@@ -89,7 +90,7 @@ namespace Nemocnice.Areas.Admin.Controllers
 
                 if (result)
                 {
-                    return RedirectToAction(nameof(Select)); // Zpět na seznam
+                    return RedirectToAction(nameof(Select));
                 }
                 else
                 {

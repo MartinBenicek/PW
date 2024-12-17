@@ -11,24 +11,18 @@ namespace Nemocnice.Areas.Doktor.Controllers
     [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doktor))]
     public class DoktorController : Controller
     {
-        private readonly ILekarskeSluzbyService _lekarskeSluzbyService;
+        private readonly IDoktorService _doktorService;
 
-        public DoktorController(ILekarskeSluzbyService lekarskeSluzbyService)
+
+        public DoktorController(IDoktorService doktorService)
         {
-            _lekarskeSluzbyService = lekarskeSluzbyService;
+            _doktorService = doktorService;
         }
 
         public IActionResult Select()
         {
-            // Získání dat
-            var lekarskeSluzby = _lekarskeSluzbyService.Select();
-
-            // Příprava ViewModelu
-            var viewModel = new 
-            {
-                LekarskeSluzby = lekarskeSluzby,
-                Ordinace = new List<Ordinace>()
-            };
+            // Získání ViewModelu přes DoktorService
+            var viewModel = _doktorService.GetLekarskeSluzbyViewModel();
 
             // Předání ViewModelu do View
             return View(viewModel);

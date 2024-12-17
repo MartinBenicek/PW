@@ -1,6 +1,6 @@
 ﻿using Nemocnice.domain.Entities;
 
-namespace Nemocnice.application.ViewModels.cs
+namespace Nemocnice.application.ViewModels
 {
     public class LekarskeSluzbyViewModels
     {
