@@ -11,12 +11,6 @@ namespace Nemocnice.Areas.Admin.Controllers
     [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doktor))]
     public class UserController : Controller
     {
-
-        private readonly PasswordHasher<User> _passwordHasher;
-        public UserController()
-        {
-            _passwordHasher = new PasswordHasher<User>();
-        }
         IUserAppService _userAppService;
 
         public UserController(IUserAppService userAppService)
@@ -39,8 +33,6 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Hash the password
-                user.PasswordHash = _passwordHasher.HashPassword(user, user.PasswordHash);
 
                 // Save the user using the application service
                 _userAppService.Create(user);
