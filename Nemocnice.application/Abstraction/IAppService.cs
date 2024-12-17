@@ -12,5 +12,7 @@ namespace Nemocnice.application.Abstraction
         IList<User> Select();
         void Create(User user);
         bool Delete(int id);
+        User GetById(int id);
+        bool Edit(User user);
     }
 }

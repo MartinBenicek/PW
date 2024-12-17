@@ -52,5 +52,36 @@ namespace Nemocnice.Areas.Admin.Controllers
             else
                 return NotFound();
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            // Získání uživatele podle ID
+            var user = _userAppService.GetById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user); 
+        }
+
+        [HttpPost]
+        public IActionResult Edit(User updatedUser)
+        {
+            if (ModelState.IsValid)
+            {
+                bool result = _userAppService.Edit(updatedUser);
+                if (result)
+                {
+                    return RedirectToAction(nameof(Select)); 
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Update selhal.");
+                }
+            }
+            return View(updatedUser);
+        }
+
     }
 }

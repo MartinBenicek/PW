@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Nemocnice.application.Abstraction;
 using Nemocnice.infrastructure.Identity;
 using Nemocnice.infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
+using Nemocnice.domain.Entities.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Nemocnice.application.Implementation
 {
@@ -40,6 +43,29 @@ namespace Nemocnice.application.Implementation
                 deleted = true;
             }
             return deleted;
+        }
+
+        public User GetById(int id)
+        {
+            return _nemocniceDbContext.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public bool Edit(User updatedUser)
+        {
+            bool edited = false;
+            User? pacient
+                = _nemocniceDbContext.Users.FirstOrDefault(u => u.Id == updatedUser.Id);
+            if (pacient != null)
+            {
+                pacient.FirstName = updatedUser.FirstName;
+                pacient.LastName = updatedUser.LastName;
+                pacient.Email = updatedUser.Email;
+                pacient.PhoneNumber = updatedUser.PhoneNumber;
+                pacient.UserName = updatedUser.UserName;
+                _nemocniceDbContext.SaveChanges();
+                edited = true;
+            }
+            return edited;
         }
     }
 }

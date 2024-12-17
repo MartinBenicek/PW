@@ -36,6 +36,7 @@
                         <td>@user.PhoneNumber</td>
                         <td>@user.PasswordHash</td>
                         <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td>
+                        <td><a asp-action="Edit" asp-route-id="@user.Id">Edit</a></td>
                     </tr>
                 }
 
