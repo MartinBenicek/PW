@@ -11,38 +11,40 @@
 @{
     if (Model != null && Model.Count > 0)
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">@nameof(myUser.Id)</th>
-                    <th scope="col">@nameof(myUser.FirstName)</th>
-                    <th scope="col">@nameof(myUser.LastName)</th>
-                    <th scope="col">@nameof(myUser.Email)</th>
-                    <th scope="col">@nameof(myUser.PhoneNumber)</th>
-                    <th scope="col">@nameof(myUser.PasswordHash)</th>
-                    <th scope="col">Delete</th>
-                    <th scope="col">Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @for (int i = 0; i < Model.Count; ++i)
-                {
-                    User user = Model[i];
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <th scope="row">@user.Id</th>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td>@user.PasswordHash</td>
-                        <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td>
-                        <td><a asp-action="Edit" asp-route-id="@user.Id">Edit</a></td>
+                        <th scope="col">@nameof(myUser.Id)</th>
+                        <th scope="col">@nameof(myUser.FirstName)</th>
+                        <th scope="col">@nameof(myUser.LastName)</th>
+                        <th scope="col">@nameof(myUser.Email)</th>
+                        <th scope="col">@nameof(myUser.PhoneNumber)</th>
+                        <th scope="col">@nameof(myUser.PasswordHash)</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
                     </tr>
-                }
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                    @for (int i = 0; i < Model.Count; ++i)
+                    {
+                        User user = Model[i];
+                        <tr>
+                            <th scope="row">@user.Id</th>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@user.PasswordHash</td>
+                            <td><a asp-action="Edit" asp-route-id="@user.Id">Edit</a></td>
+                            <td><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
     }
     else
     {
