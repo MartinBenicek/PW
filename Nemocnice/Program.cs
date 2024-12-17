@@ -48,6 +48,7 @@ builder.Services.AddScoped<IKartaService, KartaAppService>();
 builder.Services.AddScoped<IOrdinaceService, OrdinaceAppService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
+builder.Services.AddScoped<IDoktorService, DoktorService>();
 
 var app = builder.Build();
 
