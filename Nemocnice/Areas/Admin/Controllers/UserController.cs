@@ -8,7 +8,7 @@ using Nemocnice.infrastructure.Identity.Enums;
 namespace Nemocnice.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doktor))]
+    [Authorize(Roles = nameof(Roles.Admin))]
     public class UserController : Controller
     {
         IUserAppService _userAppService;
