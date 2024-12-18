@@ -4,7 +4,7 @@
 }
 <h1>@ViewData["Title"]</h1>
 <form asp-action="Create" method="post">
-    <div class="mb-3">
+    <div class="my-3">
         <label class="form-label" asp-for="FirstName"></label>
         <input class="form-control" asp-for="FirstName">
         <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -29,12 +29,13 @@
         <input class="form-control" asp-for="PasswordHash">
         <span asp-validation-for="PasswordHash" class="text-danger"></span>
     </div>
-    <div class="mb-3">
+    <div class="my-3">
         <label class="form-label" asp-for="PhoneNumber">Phone number</label>
         <input class="form-control" asp-for="PhoneNumber">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Select" class="btn btn-primary">Back to List</a>
+    <button type="submit" class="btn btn-primary ms-3">Submit</button>
 </form> 
 
 @section Scripts

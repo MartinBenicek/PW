@@ -36,17 +36,14 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Použití UserManager pro vytvoření uživatele
                 var result = await _userManager.CreateAsync(user, "DefaultPassword123!");
 
                 if (result.Succeeded)
                 {
-                    // Vše je v pořádku, přesměrujeme na seznam uživatelů
                     return RedirectToAction(nameof(UserController.Select));
                 }
                 else
                 {
-                    // Přidání chyb do ModelState pro zobrazení uživateli
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("", error.Description);
@@ -54,7 +51,7 @@ namespace Nemocnice.Areas.Admin.Controllers
                 }
             }
 
-            return View(user); // Vrácení formuláře v případě chyby
+            return View(user);
         }
 
         public IActionResult Delete(int id)
@@ -71,7 +68,6 @@ namespace Nemocnice.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            // Získání uživatele podle ID
             var user = _userAppService.GetById(id);
             if (user == null)
             {
@@ -85,7 +81,6 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Získání existujícího uživatele z databáze
                 var existingUser = _userAppService.GetById(updatedUser.Id);
 
                 if (existingUser == null)
@@ -93,14 +88,12 @@ namespace Nemocnice.Areas.Admin.Controllers
                     return NotFound(); 
                 }
 
-                // Aktualizace vlastností uživatele
                 existingUser.FirstName = updatedUser.FirstName;
                 existingUser.LastName = updatedUser.LastName;
                 existingUser.Email = updatedUser.Email;
                 existingUser.UserName = updatedUser.UserName;
                 existingUser.PhoneNumber = updatedUser.PhoneNumber;
 
-                // Zavolání služby pro uložení změn
                 bool result = _userAppService.Edit(existingUser);
 
                 if (result)
@@ -113,7 +106,7 @@ namespace Nemocnice.Areas.Admin.Controllers
                 }
             }
 
-            return View(updatedUser); // Vrátit formulář s chybami
+            return View(updatedUser);
         }
 
     }

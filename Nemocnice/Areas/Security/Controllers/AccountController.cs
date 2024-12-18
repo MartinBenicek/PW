@@ -27,7 +27,6 @@ namespace Nemocnice.Areas.Security.Controllers
                 string[] errors = await _accountService.Register(registerVM, Roles.Pacient);
                 if (errors == null)
                 {
-                    //login the user after registration
                     LoginViewModel loginVM = new LoginViewModel()
                     {
                         Username = registerVM.Username,

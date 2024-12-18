@@ -21,10 +21,8 @@ namespace Nemocnice.Areas.Doktor.Controllers
 
         public IActionResult Select()
         {
-            // Získání ViewModelu přes DoktorService
             var viewModel = _doktorService.GetLekarskeSluzbyViewModel();
 
-            // Předání ViewModelu do View
             return View(viewModel);
         }
     }

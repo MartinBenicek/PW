@@ -7,7 +7,6 @@ using Nemocnice.infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 string connectionString = builder.Configuration.GetConnectionString("MySQL");
@@ -41,7 +40,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-//registrace služeb aplikaèní vrstvy
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<ILekarskeSluzbyService, LekarskeSluzbyAppService>();
 builder.Services.AddScoped<IKartaService, KartaAppService>();
@@ -56,10 +54,9 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-//Testovací komentáø pro GIT
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
