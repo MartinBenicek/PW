@@ -15,6 +15,7 @@ namespace Nemocnice.application.Implementation
 
         public IList<LekarskeSluzby> Select()
         {
+            //_NemocniceDbContext.LekarskeSluzby.Include - Select / select many
             return _NemocniceDbContext.LekarskeSluzby.ToList();
         }
 
