@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace Nemocnice.application.ViewModels
 {
     public class RegisterViewModel
     {
+        public string? Id { get; set; }
         [Required]
         public string? Username { get; set; }
         public string? FirstName { get; set; }
@@ -12,9 +14,9 @@ namespace Nemocnice.application.ViewModels
         public string? Email { get; set; }
         [Phone]
         public string? Phone { get; set; }
-        [Required]
+        [DataType(DataType.Password)]
         public string? Password { get; set; }
-        [Required]
+        [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Passwords don't match!")]
         public string? RepeatedPassword { get; set; }
     }

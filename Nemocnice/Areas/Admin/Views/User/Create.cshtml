@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model Nemocnice.application.ViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "User - Add";
 }
@@ -20,19 +20,19 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="UserName"></label>
-        <input class="form-control" asp-for="UserName">
-        <span asp-validation-for="UserName" class="text-danger"></span>
+        <label class="form-label" asp-for="Username"></label>
+        <input class="form-control" asp-for="Username">
+        <span asp-validation-for="Username" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label class="form-label" asp-for="PasswordHash">Password</label>
-        <input class="form-control" asp-for="PasswordHash">
-        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+        <label class="form-label" asp-for="Password">Password</label>
+        <input class="form-control" asp-for="Password" type="password">
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="my-3">
-        <label class="form-label" asp-for="PhoneNumber">Phone number</label>
-        <input class="form-control" asp-for="PhoneNumber">
-        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        <label class="form-label" asp-for="Phone">Phone number</label>
+        <input class="form-control" asp-for="Phone">
+        <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
     <a asp-action="Select" class="btn btn-primary">Back to List</a>
     <button type="submit" class="btn btn-primary ms-3">Submit</button>

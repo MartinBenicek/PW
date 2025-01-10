@@ -9,12 +9,15 @@ using Nemocnice.infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Nemocnice.domain.Entities.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Nemocnice.application.ViewModels;
+using Nemocnice.infrastructure.Identity.Enums;
 
 namespace Nemocnice.application.Implementation
 {
     public class UserAppService : IUserAppService
     {
         NemocniceDbContext _nemocniceDbContext;
+        private readonly UserManager<User> _userManager;
 
 
         public UserAppService(NemocniceDbContext nemocniceDbContext)
@@ -26,10 +29,26 @@ namespace Nemocnice.application.Implementation
         {
             return _nemocniceDbContext.Users.ToList();
         }
-        public void Create(User user)
+        public bool Create(RegisterViewModel model)
         {
-            _nemocniceDbContext.Users.Add(user);
-            _nemocniceDbContext.SaveChanges();
+
+
+            var user = new User
+            {
+                UserName = model.Username,
+                Email = model.Email,
+                PhoneNumber = model.Phone,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            };
+
+            var result = _userManager.CreateAsync(user, model.Password).Result;
+            var roleResult = _userManager.AddToRoleAsync(user, Roles.Pacient.ToString()).Result;
+            if (result.Succeeded && roleResult.Succeeded)
+            {
+                return true;
+            }
+            return false;
         }
         public bool Delete(int id)
         {

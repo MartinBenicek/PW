@@ -26,10 +26,20 @@ namespace Nemocnice.application.Implementation
             var lekarskeSluzby = _lekarskeSluzbyService.Select();
             var ordinace = _ordinaceService.Select();
 
+            var viewModels = lekarskeSluzby.Select(ls => new LekarskeSluzbyViewModel
+            {
+                Id = ls.Id,
+                Ukon = ls.Ukon,
+                Ockovani = ls.Ockovani,
+                Vysetreni = ls.Vysetreni,
+                Datum = ls.Datum,
+                Budova = ordinace.FirstOrDefault(o => o.Id == ls.OrdinaceID)?.Budova ?? "N/A",
+                Mistnost = ordinace.FirstOrDefault(o => o.Id == ls.OrdinaceID)?.Mistnost ?? "N/A"
+            }).ToList();
+
             return new LekarskeSluzbyViewModels
             {
-                LekarskeSluzby = lekarskeSluzby,
-                Ordinace = ordinace
+                LekarskeSluzby = viewModels
             };
         }
     }

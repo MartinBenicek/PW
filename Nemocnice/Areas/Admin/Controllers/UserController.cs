@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Nemocnice.application.Abstraction;
+using Nemocnice.application.ViewModels;
 using Nemocnice.infrastructure.Identity;
 using Nemocnice.infrastructure.Identity.Enums;
 
@@ -31,27 +32,20 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Create(User user)
+        public IActionResult Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _userManager.CreateAsync(user, "DefaultPassword123!");
-
-                if (result.Succeeded)
+                var result = _userAppService.Create(model);
+                if (result)
                 {
-                    return RedirectToAction(nameof(UserController.Select));
+                    return RedirectToAction(nameof(Select));
                 }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
+                ModelState.AddModelError(string.Empty, "Failed to create user.");
             }
-
-            return View(user);
+            return View(model);
         }
 
         public IActionResult Delete(int id)
