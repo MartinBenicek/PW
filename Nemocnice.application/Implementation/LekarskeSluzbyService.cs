@@ -1,4 +1,5 @@
-﻿using Nemocnice.application.Abstraction;
+﻿using Microsoft.EntityFrameworkCore;
+using Nemocnice.application.Abstraction;
 using Nemocnice.domain.Entities;
 using Nemocnice.infrastructure.Database;
 

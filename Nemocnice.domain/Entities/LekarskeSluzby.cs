@@ -20,10 +20,11 @@ namespace Nemocnice.domain.Entities
 
         [ForeignKey(nameof(Ordinace))]
         public int OrdinaceID { get; set; }
+        public Ordinace Ordinace { get; set; } // Navigation property
 
         [ForeignKey(nameof(Karta))]
         public int KartaID { get; set; }
-
+        public Karta Karta { get; set; } // Navigation property
         [Required]
         public DateTime Datum { get; set; }
 
