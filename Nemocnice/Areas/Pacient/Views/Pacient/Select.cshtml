@@ -1,0 +1,35 @@
+﻿@model Nemocnice.application.ViewModels.LekarskeSluzbyViewModels
+<h1>Seznam Lékařských Služeb</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="p-3">Id</th>
+                <th scope="col" class="p-3">Úkon</th>
+                <th scope="col" class="p-3">Očkování</th>
+                <th scope="col" class="p-3">Vyšetření</th>
+                <th scope="col" class="p-3">Datum</th>
+                <th scope="col" class="p-3">Budova</th>
+                <th scope="col" class="p-3">Místnost</th>
+                <th scope="col" class="p-3">Toto je</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sluzba in Model.LekarskeSluzby)
+            {
+                var ordinace = Model.Ordinace.FirstOrDefault(o => o.Id == sluzba.OrdinaceID);
+                <tr>
+                    <td scope="row" class="p-3 fw-bold">@sluzba.Id</td>
+                    <td class="p-3">@sluzba.Ukon</td>
+                    <td class="p-3">@sluzba.Ockovani</td>
+                    <td class="p-3">@sluzba.Vysetreni</td>
+                    <td class="p-3">@sluzba.Datum</td>
+                    <td class="p-3">@(ordinace?.Budova ?? "N/A")</td>
+                    <td class="p-3">@(ordinace?.Mistnost ?? "N/A")</td>
+                    <td class="p-3">Pacient</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

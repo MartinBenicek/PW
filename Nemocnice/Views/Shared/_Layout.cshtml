@@ -26,6 +26,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Pacient))) || User.IsInRole(nameof(Roles.Doktor)) || (User.IsInRole(nameof(Roles.Admin))))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Pacient" asp-action="Select">Vaše karta</a>
+                            </li>
+                        }
                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Doktor))) || (User.IsInRole(nameof(Roles.Admin))))
                         {
                             <li class="nav-item">

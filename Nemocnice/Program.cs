@@ -47,6 +47,7 @@ builder.Services.AddScoped<IOrdinaceService, OrdinaceAppService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
 builder.Services.AddScoped<IDoktorService, DoktorService>();
+builder.Services.AddScoped<IPacientService, PacientService>();
 
 var app = builder.Build();
 
