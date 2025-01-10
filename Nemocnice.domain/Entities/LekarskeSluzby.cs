@@ -14,7 +14,6 @@ namespace Nemocnice.domain.Entities
     {
         [Key]
         public int Id { get; set; }
-
         public string? Vysetreni { get; set; }
         public string? Ockovani { get; set; }
         public string? Ukon { get; set; }
