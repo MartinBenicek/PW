@@ -9,6 +9,7 @@
                 <th scope="col" class="p-3">Úkon</th>
                 <th scope="col" class="p-3">Očkování</th>
                 <th scope="col" class="p-3">Vyšetření</th>
+                <th scope="col" class="p-3">Datum</th>
                 <th scope="col" class="p-3">Budova</th>
                 <th scope="col" class="p-3">Místnost</th>
             </tr>
@@ -22,6 +23,7 @@
                     <td class="p-3">@sluzba.Ukon</td>
                     <td class="p-3">@sluzba.Ockovani</td>
                     <td class="p-3">@sluzba.Vysetreni</td>
+                    <td class="p-3">@sluzba.Datum</td>
                     <td class="p-3">@(ordinace?.Budova ?? "N/A")</td>
                     <td class="p-3">@(ordinace?.Mistnost ?? "N/A")</td>
                 </tr>

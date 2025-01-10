@@ -25,7 +25,8 @@ namespace Nemocnice.domain.Entities
         [ForeignKey(nameof(Karta))]
         public int KartaID { get; set; }
 
-        DateTime DateOfBirth { get; set; }
+        [Required]
+        public DateTime Datum { get; set; }
 
     }
 }
