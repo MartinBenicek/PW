@@ -12,6 +12,8 @@ namespace Nemocnice.infrastructure.Database
         public DbSet<Karta> Karta { get; set; }
         public DbSet<LekarskeSluzby> LekarskeSluzby { get; set; }
         public DbSet<Ordinace> Ordinace { get; set; }
+        public DbSet<Predpis> Predpis { get; set; }
+        public DbSet<LekarskaZprava> LekarskaZprava{ get; set; }
         public NemocniceDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
@@ -26,6 +28,12 @@ namespace Nemocnice.infrastructure.Database
 
             LekarskeSluzbyInit lekarskeSluzbyInit = new LekarskeSluzbyInit();
             modelBuilder.Entity<LekarskeSluzby>().HasData(lekarskeSluzbyInit.GetLekarskeSluzby());
+
+            LekarskaZpravaInit lekarskaZpravaInit = new LekarskaZpravaInit();
+            modelBuilder.Entity<LekarskaZprava>().HasData(lekarskaZpravaInit.GetLekarskaZprava());
+
+            PredpisInit predpisInit = new PredpisInit();
+            modelBuilder.Entity<Predpis>().HasData(predpisInit.GetPredpis());
 
             RoleInit rolesInit = new RoleInit();
             modelBuilder.Entity<Role>().HasData(rolesInit.GetRolesAMC());
