@@ -1,46 +1,64 @@
 ﻿using Nemocnice.application.Abstraction;
 using Nemocnice.application.ViewModels;
-using Nemocnice.domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-namespace Nemocnice.application.Implementation
+public class PacientService : IPacientService
 {
-    public class PacientService : IPacientService
+    ILekarskeSluzbyService _lekarskeSluzbyService;
+    IOrdinaceService _ordinaceService;
+    ILekarskaZpravaService _lekarskaZpravaService;
+    IPredpisService _predpisService;
+
+    public PacientService(ILekarskeSluzbyService lekarskeSluzbyService, IOrdinaceService ordinaceService, ILekarskaZpravaService lekarskaZprava, IPredpisService predpisService)
     {
-        private readonly ILekarskeSluzbyService _lekarskeSluzbyService;
-        private readonly IOrdinaceService _ordinaceService;
+        _lekarskeSluzbyService = lekarskeSluzbyService;
+        _ordinaceService = ordinaceService;
+        _lekarskaZpravaService = lekarskaZprava;
+        _predpisService = predpisService;
+    }
 
-        public PacientService(ILekarskeSluzbyService lekarskeSluzbyService, IOrdinaceService ordinaceService)
+    public LekarskaOrdinaceViewModel GetLekarskaOrdinaceViewModel()
+    {
+        var ordinaces = _ordinaceService.Select();
+        var lekarskeSluzby = _lekarskeSluzbyService.Select();
+        var lekarskeZpravy = _lekarskaZpravaService.Select();
+        var predpisy = _predpisService.Select();
+
+        var lekarskaEvidences = lekarskeSluzby.Select(sluzba => new LekarskaEvidenceViewModel
         {
-            _lekarskeSluzbyService = lekarskeSluzbyService;
-            _ordinaceService = ordinaceService;
-        }
-
-        public LekarskeSluzbyViewModels GetLekarskeSluzbyViewModel()
+            LekarskeSluzbies = new List<LekarskeSluzbyViewModel>
         {
-            var lekarskeSluzby = _lekarskeSluzbyService.Select();
-            var ordinace = _ordinaceService.Select();
-
-            var viewModels = lekarskeSluzby.Select(ls => new LekarskeSluzbyViewModel
+            new LekarskeSluzbyViewModel
             {
-                Id = ls.Id,
-                Ukon = ls.Ukon,
-                Ockovani = ls.Ockovani,
-                Vysetreni = ls.Vysetreni,
-                Datum = ls.Datum,
-                Budova = ordinace.FirstOrDefault(o => o.Id == ls.OrdinaceID)?.Budova ?? "N/A",
-                Mistnost = ordinace.FirstOrDefault(o => o.Id == ls.OrdinaceID)?.Mistnost ?? "N/A"
-            }).ToList();
+                Id = sluzba.Id,
+                Ukon = sluzba.Ukon,
+                Ockovani = sluzba.Ockovani,
+                Vysetreni = sluzba.Vysetreni,
+                Datum = sluzba.Datum
+            }
+        },
+            LekarskaZpravas = lekarskeZpravy
+                .Where(z => z.LekarskeSluzbyID == sluzba.Id) // Ensure relationships are set up in your models.
+                .Select(z => new LekarskaZpravaViewModel
+                {
+                    Id = z.Id,
+                    Datum = z.Datum,
+                    Zprava = z.Zprava
+                }).ToList(),
+            Prepises = predpisy
+                .Where(p => p.LekarskeSluzbyID == sluzba.Id)
+                .Select(p => new PredpisViewModel
+                {
+                    Id = p.Id,
+                    TypLeku = p.TypLeku,
+                    NazevLeku = p.NazevLeku,
+                    CasPodani = p.CasPodani
+                }).ToList()
+        }).ToList();
 
-            return new LekarskeSluzbyViewModels
-            {
-                LekarskeSluzby = viewModels
-            };
-        }
+        return new LekarskaOrdinaceViewModel
+        {
+            Ordinaces = (IList<OrdinaceViewModel>)ordinaces,
+            LekarskaEvidences = lekarskaEvidences
+        };
     }
 }

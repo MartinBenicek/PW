@@ -12,8 +12,8 @@ namespace Nemocnice.application.Abstraction
     {
         IList<User> Select();
         bool Create(RegisterViewModel model);
+        bool Update(int id, RegisterViewModel model);
         bool Delete(int id);
-        User GetById(int id);
-        bool Edit(User user);
+        RegisterViewModel GetEditViewModel(int id);
     }
 }

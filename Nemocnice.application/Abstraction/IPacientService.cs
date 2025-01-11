@@ -4,6 +4,6 @@ namespace Nemocnice.application.Abstraction
 {
     public interface IPacientService
     {
-        LekarskeSluzbyViewModels GetLekarskeSluzbyViewModel();
+        LekarskaOrdinaceViewModel GetLekarskaOrdinaceViewModel();
     }
 }

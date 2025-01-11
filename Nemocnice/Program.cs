@@ -44,6 +44,8 @@ builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<ILekarskeSluzbyService, LekarskeSluzbyAppService>();
 builder.Services.AddScoped<IKartaService, KartaAppService>();
 builder.Services.AddScoped<IOrdinaceService, OrdinaceAppService>();
+builder.Services.AddScoped<IPredpisService, PredpisAppService>();
+builder.Services.AddScoped<ILekarskaZpravaService, LekarskaZpravaService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
 builder.Services.AddScoped<IDoktorService, DoktorService>();

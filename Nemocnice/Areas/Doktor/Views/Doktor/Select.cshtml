@@ -1,32 +1,45 @@
-﻿@model Nemocnice.application.ViewModels.LekarskeSluzbyViewModels
-<h1>Seznam Lékařských Služeb</h1>
-
-<div class="table-responsive">
-    <table class="table">
-        <thead>
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ukon</th>
+            <th>Ockovani</th>
+            <th>Vysetreni</th>
+            <th>Datum</th>
+            <th>Budova</th>
+            <th>Mistnost</th>
+            <th>Lekarska Zprava</th>
+            <th>Predpis</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sluzba in Model.LekarskeSluzby)
+        {
             <tr>
-                <th scope="col" class="p-3">Id</th>
-                <th scope="col" class="p-3">Úkon</th>
-                <th scope="col" class="p-3">Očkování</th>
-                <th scope="col" class="p-3">Vyšetření</th>
-                <th scope="col" class="p-3">Datum</th>
-                <th scope="col" class="p-3">Budova</th>
-                <th scope="col" class="p-3">Místnost</th>
+                <td>@sluzba.Id</td>
+                <td>@sluzba.Ukon</td>
+                <td>@sluzba.Ockovani</td>
+                <td>@sluzba.Vysetreni</td>
+                <td>@sluzba.Datum</td>
+                <td>@sluzba.Budova</td>
+                <td>@sluzba.Mistnost</td>
+                <td>
+                    <ul>
+                        @foreach (var zprava in sluzba)
+                        {
+                            <li>@zprava.Zprava (@zprava.Datum)</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var predpis in sluzba.Predpisy)
+                        {
+                            <li>@predpis.TypLeku - @predpis.NazevLeku (@predpis.CasPodani)</li>
+                        }
+                    </ul>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var sluzba in Model.LekarskeSluzby)
-            {
-                <tr>
-                    <td scope="row" class="p-3 fw-bold">@sluzba.Id</td>
-                    <td class="p-3">@sluzba.Ukon</td>
-                    <td class="p-3">@sluzba.Ockovani</td>
-                    <td class="p-3">@sluzba.Vysetreni</td>
-                    <td class="p-3">@sluzba.Datum.ToShortDateString()</td>
-                    <td class="p-3">@sluzba.Budova</td>
-                    <td class="p-3">@sluzba.Mistnost</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>

@@ -18,12 +18,13 @@ namespace Nemocnice.Areas.Doktor.Controllers
         {
             _doktorService = doktorService;
         }
-
+        /*
+        [HttpGet]
         public IActionResult Select()
         {
             LekarskeSluzbyViewModels viewModel = _doktorService.GetLekarskeSluzbyViewModel();
 
             return View(viewModel);
-        }
+        }*/
     }
 }

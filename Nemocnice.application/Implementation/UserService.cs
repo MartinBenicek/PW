@@ -16,18 +16,17 @@ namespace Nemocnice.application.Implementation
 {
     public class UserAppService : IUserAppService
     {
-        NemocniceDbContext _nemocniceDbContext;
         private readonly UserManager<User> _userManager;
 
 
-        public UserAppService(NemocniceDbContext nemocniceDbContext)
+        public UserAppService(UserManager<User> userManager)
         {
-            _nemocniceDbContext = nemocniceDbContext;
+            _userManager = userManager;
         }
 
         public IList<User> Select()
         {
-            return _nemocniceDbContext.Users.ToList();
+            return _userManager.Users.ToList();
         }
         public bool Create(RegisterViewModel model)
         {
@@ -52,39 +51,41 @@ namespace Nemocnice.application.Implementation
         }
         public bool Delete(int id)
         {
-            bool deleted = false;
-            User? pacient
-                = _nemocniceDbContext.Users.FirstOrDefault(prod => prod.Id == id);
-            if (pacient != null)
-            {
-                _nemocniceDbContext.Users.Remove(pacient);
-                _nemocniceDbContext.SaveChanges();
-                deleted = true;
-            }
-            return deleted;
+            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            if (user == null) return false;
+
+            var result = _userManager.DeleteAsync(user).Result;
+            return result.Succeeded;
         }
 
-        public User GetById(int id)
+        public RegisterViewModel GetEditViewModel(int id)
         {
-            return _nemocniceDbContext.Users.FirstOrDefault(u => u.Id == id);
+            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            if (user == null) return null;
+
+            return new RegisterViewModel
+            {
+                Username = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.PhoneNumber
+            };
         }
 
-        public bool Edit(User updatedUser)
+        public bool Update(int id, RegisterViewModel model)
         {
-            bool edited = false;
-            User? pacient
-                = _nemocniceDbContext.Users.FirstOrDefault(u => u.Id == updatedUser.Id);
-            if (pacient != null)
-            {
-                pacient.FirstName = updatedUser.FirstName;
-                pacient.LastName = updatedUser.LastName;
-                pacient.Email = updatedUser.Email;
-                pacient.PhoneNumber = updatedUser.PhoneNumber;
-                pacient.UserName = updatedUser.UserName;
-                _nemocniceDbContext.SaveChanges();
-                edited = true;
-            }
-            return edited;
+            var user = _userManager.FindByIdAsync(id.ToString()).Result;
+            if (user == null) return false;
+
+            user.UserName = model.Username;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.PhoneNumber = model.Phone;
+
+            var result = _userManager.UpdateAsync(user).Result;
+            return result.Succeeded;
         }
     }
 }

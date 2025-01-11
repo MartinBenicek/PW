@@ -12,13 +12,11 @@ namespace Nemocnice.Areas.Admin.Controllers
     [Authorize(Roles = nameof(Roles.Admin))]
     public class UserController : Controller
     {
-        IUserAppService _userAppService;
 
-        private readonly UserManager<User> _userManager;
+        private readonly IUserAppService _userAppService;
 
-        public UserController(UserManager<User> userManager, IUserAppService userAppService)
+        public UserController(IUserAppService userAppService)
         {
-            _userManager = userManager;
             _userAppService = userAppService;
         }
         public IActionResult Select()
@@ -53,54 +51,35 @@ namespace Nemocnice.Areas.Admin.Controllers
             bool deleted = _userAppService.Delete(id);
             if (deleted)
             {
-                return RedirectToAction(nameof(UserController.Select));
+                return RedirectToAction(nameof(Select));
             }
-            else
-                return NotFound();
+            return NotFound();
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var user = _userAppService.GetById(id);
-            if (user == null)
+            var model = _userAppService.GetEditViewModel(id);
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(user); 
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(User updatedUser)
+        public IActionResult Edit(int id, RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var existingUser = _userAppService.GetById(updatedUser.Id);
-
-                if (existingUser == null)
-                {
-                    return NotFound(); 
-                }
-
-                existingUser.FirstName = updatedUser.FirstName;
-                existingUser.LastName = updatedUser.LastName;
-                existingUser.Email = updatedUser.Email;
-                existingUser.UserName = updatedUser.UserName;
-                existingUser.PhoneNumber = updatedUser.PhoneNumber;
-
-                bool result = _userAppService.Edit(existingUser);
-
+                var result = _userAppService.Update(id, model);
                 if (result)
                 {
                     return RedirectToAction(nameof(Select));
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Update failed. Please try again.");
-                }
+                ModelState.AddModelError(string.Empty, "Failed to update user.");
             }
-
-            return View(updatedUser);
+            return View(model);
         }
 
     }
