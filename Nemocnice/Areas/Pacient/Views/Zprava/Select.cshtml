@@ -1,0 +1,21 @@
+﻿@model IList<LekarskaZprava>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Zpráva</th>
+            <th>Datum Napsání</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sluzba in Model)
+        {
+            <tr>
+                <td>@sluzba.Id</td>
+                <td>@sluzba.Zprava</td>
+                <td>@sluzba.Datum</td>
+            </tr>
+        }
+    </tbody>
+</table>

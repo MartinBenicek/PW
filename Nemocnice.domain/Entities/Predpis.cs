@@ -16,9 +16,11 @@ namespace Nemocnice.domain.Entities
             public int Id { get; set; }
             [Required]
             public string? TypLeku { get; set; }
+            [Required]
             public string? NazevLeku { get; set; }
+            [Required]
             public string? CasPodani { get; set; }
-            [ForeignKey(nameof(LekarskeSluzby))]
-            public int LekarskeSluzbyID { get; set; }
+            [ForeignKey(nameof(LekarskaZprava))]
+            public int LekarskaZpravaID { get; set; }
         }
 }

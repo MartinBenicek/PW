@@ -1,0 +1,42 @@
+﻿@model IList<Nemocnice.application.ViewModels.ProhlidkyViewModel>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/prohlidky.css" />
+}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Karta ID</th>
+                <th>Ordinace ID</th>
+                <th>Budova</th>
+                <th>Místnost</th>
+                <th>Doktor ID</th>
+                <th>Lékařské služby ID</th>
+                <th>Úkon</th>
+                <th>Vyšetření</th>
+                <th>Očkování</th>
+                <th>Datum</th>
+                <th>Pacient ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prohlidka in Model)
+            {
+                <tr>
+                    <td>@prohlidka.Ordinace.OrdinaceId</td>
+                    <td>@prohlidka.Ordinace.Budova</td>
+                    <td>@prohlidka.Ordinace.Mistnost</td>
+                    <td>@prohlidka.Ordinace.DoktorId</td>
+                    <td>@prohlidka.LekarskeSluzby.LekarskeSluzbyId</td>
+                    <td>@prohlidka.LekarskeSluzby.Ukon</td>
+                    <td>@prohlidka.LekarskeSluzby.Vysetreni</td>
+                    <td>@prohlidka.LekarskeSluzby.Ockovani</td>
+                    <td>@prohlidka.LekarskeSluzby.Datum</td>
+                    <td>@prohlidka.Karta.KartaId</td>
+                    <td>@prohlidka.Karta.PacientId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

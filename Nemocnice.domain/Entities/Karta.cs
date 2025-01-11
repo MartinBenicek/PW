@@ -15,9 +15,6 @@ namespace Nemocnice.domain.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string? Stav { get; set; }
-
         [ForeignKey(nameof(Pacient))]
         public int PacientID { get; set; }
 

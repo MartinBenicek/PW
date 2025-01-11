@@ -1,4 +1,5 @@
 ﻿using Nemocnice.domain.Entities.Interfaces;
+using Nemocnice.domain.Validations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,15 +19,16 @@ namespace Nemocnice.domain.Entities
         public string? Ockovani { get; set; }
         public string? Ukon { get; set; }
 
+        [Required]
+        [FutureDate]
+        public DateTime Datum { get; set; }
+
         [ForeignKey(nameof(Ordinace))]
         public int OrdinaceID { get; set; }
-        public Ordinace Ordinace { get; set; } // Navigation property
 
         [ForeignKey(nameof(Karta))]
         public int KartaID { get; set; }
-        public Karta Karta { get; set; } // Navigation property
-        [Required]
-        public DateTime Datum { get; set; }
+        
 
     }
 }

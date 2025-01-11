@@ -62,7 +62,5 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             };
             return doktor;
         }
-
-        
     }
 }

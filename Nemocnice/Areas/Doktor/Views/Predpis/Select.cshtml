@@ -1,0 +1,27 @@
+﻿@model IList<Predpis>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Typ Léku</th>
+                <th>Název Léku</th>
+                <th>Čas podání</th>
+                <th>LekarskaZpravaID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sluzba in Model)
+            {
+                <tr>
+                    <td>@sluzba.Id</td>
+                    <td>@sluzba.TypLeku</td>
+                    <td>@sluzba.NazevLeku</td>
+                    <td>@sluzba.CasPodani</td>
+                    <td>@sluzba.LekarskaZpravaID</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

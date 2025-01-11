@@ -18,7 +18,7 @@ namespace Nemocnice.domain.Entities
         public DateTime? Datum { get; set; }
         public string? Zprava { get; set; }
 
-        [ForeignKey(nameof(LekarskeSluzby))]
-        public int LekarskeSluzbyID { get; set; }
+        [ForeignKey(nameof(Karta))]
+        public int KartaID { get; set; }
     }
 }

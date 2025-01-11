@@ -26,22 +26,43 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Pacient))) || User.IsInRole(nameof(Roles.Doktor)) || (User.IsInRole(nameof(Roles.Admin))))
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Pacient))) && !(User.IsInRole(nameof(Roles.Doktor))) && !(User.IsInRole(nameof(Roles.Admin))))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Pacient" asp-action="Select">Vaše karta</a>
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Prohlidky" asp-action="Select">Vaše Prohlídky</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Predpis" asp-action="Select">Vaše léky</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Zprava" asp-action="Select">Lékařská zpráva</a>
                             </li>
                         }
-                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Doktor))) || (User.IsInRole(nameof(Roles.Admin))))
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Doktor))) && !(User.IsInRole(nameof(Roles.Admin))))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Doktor" asp-action="Select">Doktorská karta</a>
+                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Prohlidky" asp-action="Select">Prohlídky pacientů</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Predpis" asp-action="Select">Léky pacientů</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Zprava" asp-action="Select">Zprávy pacientů</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Admin))))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Select">Administrace</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Prohlidky" asp-action="Select">Správa prohlídek</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Predpis" asp-action="Select">Správa medikamentu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Zprava" asp-action="Select">Správa lékažských zpráv</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="Select">Správa uživatelů</a>
                             </li>
                         }
                     </ul>

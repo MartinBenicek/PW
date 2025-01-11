@@ -48,8 +48,6 @@ builder.Services.AddScoped<IPredpisService, PredpisAppService>();
 builder.Services.AddScoped<ILekarskaZpravaService, LekarskaZpravaService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
-builder.Services.AddScoped<IDoktorService, DoktorService>();
-builder.Services.AddScoped<IPacientService, PacientService>();
 
 var app = builder.Build();
 

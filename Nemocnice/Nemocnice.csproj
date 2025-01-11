@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Doktor\Views\LekarskeSluzby\**" />
+    <Content Remove="Areas\Doktor\Views\LekarskeSluzby\**" />
+    <EmbeddedResource Remove="Areas\Doktor\Views\LekarskeSluzby\**" />
+    <None Remove="Areas\Doktor\Views\LekarskeSluzby\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,10 +24,6 @@
     <ProjectReference Include="..\Nemocnice.application\Nemocnice.application.csproj" />
     <ProjectReference Include="..\Nemocnice.domain\Nemocnice.domain.csproj" />
     <ProjectReference Include="..\Nemocnice.infrastructure\Nemocnice.infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Doktor\Views\LekarskeSluzby\" />
   </ItemGroup>
 
   <ItemGroup>
