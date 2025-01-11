@@ -6,7 +6,7 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<a asp-action="Create" class="btn btn-primary my-3">Create User</a>
+<a asp-action="Create" class="btn btn-info my-3">Create User</a>
 
 @{
     if (Model != null && Model.Count > 0)
@@ -37,8 +37,8 @@
                             <td class="p-3">@user.UserName</td>
                             <td class="p-3">@user.Email</td>
                             <td class="p-3">@user.PhoneNumber</td>
-                            <td class="p-3"><a asp-action="Edit" asp-route-id="@user.Id">Edit</a></td>
-                            <td class="p-3"><a asp-action="Delete" asp-route-id="@user.Id" onclick="return ConfirmDelete();">Delete</a></td>
+                            <td class="p-3"><a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning">Edit</a></td>
+                            <td class="p-3"><a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a></td>
                         </tr>
                     }
 
