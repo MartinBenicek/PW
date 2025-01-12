@@ -45,5 +45,20 @@ namespace Nemocnice.Areas.Admin.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var predpis = _context.Predpis.FirstOrDefault(lz => lz.Id == id);
+
+            if (predpis != null)
+            {
+                _context.Predpis.Remove(predpis);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Select));
+            }
+
+            return NotFound();
+        }
     }
 }

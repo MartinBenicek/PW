@@ -49,5 +49,20 @@ namespace Nemocnice.Areas.Admin.Controllers
 
             return View(prohlidky);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var sluzba = _context.LekarskeSluzby.FirstOrDefault(lz => lz.Id == id);
+
+            if (sluzba != null)
+            {
+                _context.LekarskeSluzby.Remove(sluzba);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Select));
+            }
+
+            return NotFound();
+        }
     }
 }
