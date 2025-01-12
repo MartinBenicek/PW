@@ -10,6 +10,7 @@
                 <th>Typ Léku</th>
                 <th>Název Léku</th>
                 <th>Čas podání</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -22,6 +23,7 @@
                     <td>@sluzba.Predpis.TypLeku</td>
                     <td>@sluzba.Predpis.NazevLeku</td>
                     <td>@sluzba.Predpis.CasPodani</td>
+                    <td><a asp-action="Edit" asp-route-id="@sluzba.Predpis.Id" class="btn btn-warning">Edit</a></td>
                 </tr>
             }
         </tbody>

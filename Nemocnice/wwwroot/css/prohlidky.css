@@ -1,3 +1,3 @@
 ﻿.table th, .table td {
-    margin: 10px 20px; /* Adjust the values for more or less spacing */
+    padding: 0.75rem; /* Adjust the values for more or less spacing */
 }

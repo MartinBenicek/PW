@@ -18,8 +18,5 @@ namespace Nemocnice.domain.Entities
         [ForeignKey(nameof(Pacient))]
         public int PacientID { get; set; }
 
-        [ForeignKey(nameof(LekarskeSluzby))]
-        public int LekarskeSluzbyID { get; set; }
-
     }
 }

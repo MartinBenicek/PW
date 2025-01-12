@@ -10,6 +10,8 @@
                 <th>Typ Léku</th>
                 <th>Název Léku</th>
                 <th>Čas podání</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +24,15 @@
                     <td>@sluzba.Predpis.TypLeku</td>
                     <td>@sluzba.Predpis.NazevLeku</td>
                     <td>@sluzba.Predpis.CasPodani</td>
+                    <td><a asp-action="Edit" asp-route-id="@sluzba.Predpis.Id" class="btn btn-warning">Edit</a></td>
+                    <td><a asp-action="Delete" asp-route-id="@sluzba.Predpis.Id" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a></td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section Scripts
+                    {
+    <script src="~/js/site.js"></script>
+}

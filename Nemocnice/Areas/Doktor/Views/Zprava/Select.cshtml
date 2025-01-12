@@ -8,6 +8,7 @@
             <th>Lekarska Zpráva ID</th>
             <th>Zpráva</th>
             <th>Datum Napsání</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
                 <td>@item.LekarskaZprava.LekarskaZpravaId</td>
                 <td>@item.LekarskaZprava.Zprava</td>
                 <td>@item.LekarskaZprava.Datum?.ToString("dd.MM.yyyy")</td>
+                <td><a asp-action="Edit" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-warning">Edit</a></td>
             </tr>
         }
     </tbody>

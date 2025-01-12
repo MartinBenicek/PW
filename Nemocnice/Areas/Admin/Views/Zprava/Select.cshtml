@@ -1,5 +1,10 @@
 ﻿@model IList<KartaLekarskaZprava>
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/prohlidky.css" />
+}
 
+<a asp-action="Create" class="btn btn-info mb-3">Create lékařská služba</a>
 <table class="table">
     <thead>
         <tr>
@@ -8,6 +13,8 @@
             <th>Lekarska Zpráva ID</th>
             <th>Zpráva</th>
             <th>Datum Napsání</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +26,15 @@
                 <td>@item.LekarskaZprava.LekarskaZpravaId</td>
                 <td>@item.LekarskaZprava.Zprava</td>
                 <td>@item.LekarskaZprava.Datum?.ToString("dd.MM.yyyy")</td>
+                <td><a asp-action="Edit" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-warning">Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts
+                {
+    <script src="~/js/site.js"></script>
+    <script src="~/js/validations/FutureDate.js"></script>
+}

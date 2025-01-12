@@ -16,6 +16,7 @@
                 <th>Vyšetření</th>
                 <th>Očkování</th>
                 <th>Datum</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                     <td>@prohlidka.LekarskeSluzby.Vysetreni</td>
                     <td>@prohlidka.LekarskeSluzby.Ockovani</td>
                     <td>@prohlidka.LekarskeSluzby.Datum</td>
+                    <td><a asp-action="Edit" asp-route-id="@prohlidka.LekarskeSluzby.LekarskeSluzbyId" class="btn btn-warning">Edit</a></td>
                 </tr>
             }
         </tbody>

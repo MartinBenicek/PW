@@ -1,0 +1,29 @@
+﻿@model KartaLekarskaZprava
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label>Pacient ID</label>
+        @Html.TextBoxFor(m => m.Karta.PacientId, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Karta ID</label>
+        @Html.TextBoxFor(m => m.Karta.KartaId, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Zpráva</label>
+        @Html.TextAreaFor(m => m.LekarskaZprava.Zprava, new { @class = "form-control" })
+    </div>
+    <div>
+        <label>Datum</label>
+        @Html.TextBoxFor(m => m.LekarskaZprava.Datum, new { @type = "date", @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Vytvořit</button>
+</form>
+
+
+@section Scripts
+{
+    <script src="~/js/validations/FutureDate.js"></script>
+}

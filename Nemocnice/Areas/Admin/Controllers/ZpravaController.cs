@@ -41,5 +41,21 @@ namespace Nemocnice.Areas.Admin.Controllers
                              .ToList();
             return View(viewModel);
         }
+
+        public IActionResult Delete(int id)
+        {
+            var zprava = _context.LekarskaZprava.FirstOrDefault(lz => lz.Id == id);
+
+            if (zprava != null)
+            {
+                _context.LekarskaZprava.Remove(zprava);
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Select));
+            }
+
+            return NotFound();
+        }
+
     }
 }
