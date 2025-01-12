@@ -1,25 +1,27 @@
-﻿@model IList<Predpis>
+﻿@model IList<Nemocnice.application.ViewModels.KartaPredpisViewModel>
 
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Karta ID</th>
+                <th>Pacient ID</th>
+                <th>Předpis ID</th>
                 <th>Typ Léku</th>
                 <th>Název Léku</th>
                 <th>Čas podání</th>
-                <th>LekarskaZpravaID</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var sluzba in Model)
             {
                 <tr>
-                    <td>@sluzba.Id</td>
-                    <td>@sluzba.TypLeku</td>
-                    <td>@sluzba.NazevLeku</td>
-                    <td>@sluzba.CasPodani</td>
-                    <td>@sluzba.LekarskaZpravaID</td>
+                    <td>@sluzba.Karta.KartaId</td>
+                    <td>@sluzba.Karta.PacientId</td>
+                    <td>@sluzba.Predpis.Id</td>
+                    <td>@sluzba.Predpis.TypLeku</td>
+                    <td>@sluzba.Predpis.NazevLeku</td>
+                    <td>@sluzba.Predpis.CasPodani</td>
                 </tr>
             }
         </tbody>

@@ -22,7 +22,23 @@ namespace Nemocnice.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Select()
         {
-            var viewModel = _context.LekarskaZprava.ToList();
+            var viewModel = (from karta in _context.Karta
+                             join lekarskaZprava in _context.LekarskaZprava on karta.Id equals lekarskaZprava.KartaID
+                             select new KartaLekarskaZprava
+                             {
+                                 Karta = new KartaViewModel
+                                 {
+                                     KartaId = karta.Id,
+                                     PacientId = karta.PacientID
+                                 },
+                                 LekarskaZprava = new LekarskaZpravaViewModel
+                                 {
+                                     LekarskaZpravaId = lekarskaZprava.Id,
+                                     Zprava = lekarskaZprava.Zprava,
+                                     Datum = lekarskaZprava.Datum
+                                 }
+                             })
+                             .ToList();
             return View(viewModel);
         }
     }

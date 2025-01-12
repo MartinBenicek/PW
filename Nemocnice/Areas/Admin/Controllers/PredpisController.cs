@@ -23,7 +23,25 @@ namespace Nemocnice.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Select()
         {
-            var viewModel = _context.Predpis.ToList();
+            var viewModel = (from karta in _context.Karta
+                             join lekarskaZprava in _context.LekarskaZprava on karta.Id equals lekarskaZprava.KartaID
+                             join predpis in _context.Predpis on lekarskaZprava.Id equals predpis.LekarskaZpravaID
+                             select new KartaPredpisViewModel
+                             {
+                                 Karta = new KartaViewModel
+                                 {
+                                     KartaId = karta.Id,
+                                     PacientId = karta.PacientID
+                                 },
+                                 Predpis = new PredpisViewModel
+                                 {
+                                     Id = predpis.Id,
+                                     TypLeku = predpis.TypLeku,
+                                     NazevLeku = predpis.NazevLeku,
+                                     CasPodani = predpis.CasPodani
+                                 }
+                             })
+                             .ToList();
 
             return View(viewModel);
         }

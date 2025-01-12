@@ -8,8 +8,8 @@ namespace Nemocnice.application.ViewModels
 {
     public class LekarskaZpravaViewModel
     {
-        public int Id { get; set; }
-        public DateTime? Datum { get; set; }
+        public int LekarskaZpravaId { get; set; }
         public string? Zprava { get; set; }
+        public DateTime? Datum { get; set; }
     }
 }

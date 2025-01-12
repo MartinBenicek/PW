@@ -1,20 +1,24 @@
-﻿@model IList<LekarskaZprava>
+﻿@model IList<KartaLekarskaZprava>
 
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>Karta ID</th>
+            <th>Pacient ID</th>
+            <th>Lekarska Zpráva ID</th>
             <th>Zpráva</th>
             <th>Datum Napsání</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var sluzba in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@sluzba.Id</td>
-                <td>@sluzba.Zprava</td>
-                <td>@sluzba.Datum</td>
+                <td>@item.Karta.KartaId</td>
+                <td>@item.Karta.PacientId</td>
+                <td>@item.LekarskaZprava.LekarskaZpravaId</td>
+                <td>@item.LekarskaZprava.Zprava</td>
+                <td>@item.LekarskaZprava.Datum?.ToString("dd.MM.yyyy")</td>
             </tr>
         }
     </tbody>
