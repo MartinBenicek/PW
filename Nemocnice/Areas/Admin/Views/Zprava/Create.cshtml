@@ -1,29 +1,27 @@
-﻿@model KartaLekarskaZprava
+﻿@model LekarskaZprava
 
-<form asp-action="Create" method="post">
-    @Html.AntiForgeryToken()
-
-    <div>
-        <label>Pacient ID</label>
-        @Html.TextBoxFor(m => m.Karta.PacientId, new { @class = "form-control" })
-    </div>
-    <div>
-        <label>Karta ID</label>
-        @Html.TextBoxFor(m => m.Karta.KartaId, new { @class = "form-control" })
-    </div>
-    <div>
-        <label>Zpráva</label>
-        @Html.TextAreaFor(m => m.LekarskaZprava.Zprava, new { @class = "form-control" })
-    </div>
-    <div>
-        <label>Datum</label>
-        @Html.TextBoxFor(m => m.LekarskaZprava.Datum, new { @type = "date", @class = "form-control" })
-    </div>
-    <button type="submit" class="btn btn-primary">Vytvořit</button>
-</form>
-
-
-@section Scripts
-{
-    <script src="~/js/validations/FutureDate.js"></script>
+@{
+    ViewData["Title"] = "Create Lekarska Zprava";
 }
+
+<h2>Create Lekarska Zprava</h2>
+
+<form asp-area="Admin" asp-controller="Zprava" asp-action="Create" method="post">
+    <div class="form-group my-3">
+        <label asp-for="KartaID"></label>
+        <textarea asp-for="KartaID" class="form-control"></textarea>
+        <span asp-validation-for="KartaID" class="text-danger"></span>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Zprava"></label>
+        <textarea asp-for="Zprava" class="form-control"></textarea>
+        <span asp-validation-for="Zprava" class="text-danger"></span>
+    </div>
+    <div class="my-3">
+        <label class="form-label" asp-for="Datum"></label>
+        <input class="form-control" asp-for="Datum" />
+        <span asp-validation-for="Datum" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

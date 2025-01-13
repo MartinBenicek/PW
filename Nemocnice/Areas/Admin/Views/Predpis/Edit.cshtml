@@ -1,0 +1,29 @@
+﻿@model LekarskaZpravaPredpisViewModel
+
+<h2>Edit Predpis</h2>
+
+<form asp-area="Admin" asp-controller="Predpis" asp-action="Edit" method="post">
+    <input asp-for="Predpis.Id" type="hidden" />
+    <input asp-for="LekarskaZprava.LekarskaZpravaId" type="hidden" />
+
+    <div class="form-group my-3">
+        <label asp-for="Predpis.NazevLeku"></label>
+        <textarea asp-for="Predpis.NazevLeku" class="form-control"></textarea>
+        <span asp-validation-for="Predpis.NazevLeku" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Predpis.TypLeku"></label>
+        <input asp-for="Predpis.TypLeku" class="form-control" />
+        <span asp-validation-for="Predpis.TypLeku" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Predpis.CasPodani"></label>
+        <input asp-for="Predpis.CasPodani" class="form-control" />
+        <span asp-validation-for="Predpis.CasPodani" class="text-danger"></span>
+    </div>
+
+    <a asp-action="Select" class="btn btn-primary">Back to List</a>
+    <button type="submit" class="btn btn-success">Edit</button>
+</form>

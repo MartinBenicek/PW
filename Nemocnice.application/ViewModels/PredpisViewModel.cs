@@ -12,5 +12,6 @@ namespace Nemocnice.application.ViewModels
         public string? TypLeku { get; set; }
         public string? NazevLeku { get; set; }
         public string? CasPodani { get; set; }
+        public int LekarskaZpravaId { get; set; }
     }
 }

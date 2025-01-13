@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nemocnice.infrastructure.Database;
 
@@ -11,9 +12,11 @@ using Nemocnice.infrastructure.Database;
 namespace Nemocnice.infrastructure.Migrations
 {
     [DbContext(typeof(NemocniceDbContext))]
-    partial class NemocniceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250112182444_18th migration")]
+    partial class _18thmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,7 +191,8 @@ namespace Nemocnice.infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Datum")
+                    b.Property<DateTime?>("Datum")
+                        .IsRequired()
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("KartaID")
@@ -352,8 +356,6 @@ namespace Nemocnice.infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LekarskaZpravaID");
 
                     b.ToTable("Predpis");
 
@@ -596,17 +598,6 @@ namespace Nemocnice.infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Nemocnice.domain.Entities.Predpis", b =>
-                {
-                    b.HasOne("Nemocnice.domain.Entities.LekarskaZprava", "LekarskaZprava")
-                        .WithMany()
-                        .HasForeignKey("LekarskaZpravaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LekarskaZprava");
                 });
 #pragma warning restore 612, 618
         }

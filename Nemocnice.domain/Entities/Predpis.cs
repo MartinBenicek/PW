@@ -22,5 +22,6 @@ namespace Nemocnice.domain.Entities
             public string? CasPodani { get; set; }
             [ForeignKey(nameof(LekarskaZprava))]
             public int LekarskaZpravaID { get; set; }
-        }
+            public LekarskaZprava LekarskaZprava { get; set; }
+    }
 }

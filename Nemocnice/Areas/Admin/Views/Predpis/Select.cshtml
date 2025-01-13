@@ -1,12 +1,13 @@
-﻿@model IList<Nemocnice.application.ViewModels.KartaPredpisViewModel>
+﻿@model IList<Nemocnice.application.ViewModels.LekarskaZpravaPredpisViewModel>
 
+<a asp-action="Create" class="btn btn-info mb-3">Create předpis</a>
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th>Karta ID</th>
-                <th>Pacient ID</th>
                 <th>Předpis ID</th>
+                <th>Karta ID</th>
+                <th>Lekařská zpráva ID</th>
                 <th>Typ Léku</th>
                 <th>Název Léku</th>
                 <th>Čas podání</th>
@@ -18,9 +19,9 @@
             @foreach (var sluzba in Model)
             {
                 <tr>
-                    <td>@sluzba.Karta.KartaId</td>
-                    <td>@sluzba.Karta.PacientId</td>
                     <td>@sluzba.Predpis.Id</td>
+                    <td>@sluzba.LekarskaZprava.KartaId</td>
+                    <td>@sluzba.LekarskaZprava.LekarskaZpravaId</td>
                     <td>@sluzba.Predpis.TypLeku</td>
                     <td>@sluzba.Predpis.NazevLeku</td>
                     <td>@sluzba.Predpis.CasPodani</td>

@@ -57,5 +57,24 @@ namespace Nemocnice.Areas.Admin.Controllers
             return NotFound();
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(LekarskaZprava lekarskaZprava)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.LekarskaZprava.Add(lekarskaZprava);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Select));
+            }
+
+            return View(lekarskaZprava);
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nemocnice.application.ViewModels;
+using Nemocnice.domain.Entities;
 using Nemocnice.infrastructure.Database;
 using Nemocnice.infrastructure.Identity.Enums;
 
@@ -63,6 +64,36 @@ namespace Nemocnice.Areas.Admin.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new ProhlidkyViewModel());
+        }
+
+
+        [HttpPost]
+        public IActionResult Create(ProhlidkyViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var lekarskeSluzby = new LekarskeSluzby
+                {
+                    KartaID = viewModel.Karta.KartaId,
+                    Ukon = viewModel.LekarskeSluzby.Ukon,
+                    Vysetreni = viewModel.LekarskeSluzby.Vysetreni,
+                    Ockovani = viewModel.LekarskeSluzby.Ockovani,
+                    Datum = viewModel.LekarskeSluzby.Datum,
+                    OrdinaceID = viewModel.Ordinace.OrdinaceId
+                };
+
+                _context.LekarskeSluzby.Add(lekarskeSluzby);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Select));
+            }
+
+            return View(viewModel);
         }
     }
 }
