@@ -43,7 +43,7 @@ namespace Nemocnice.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() //Stále NEFUNGUJE správně
+        public IActionResult Create()
         {
             return View(new KartaLekarskaZprava());
         }
