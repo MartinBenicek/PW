@@ -41,14 +41,17 @@ namespace Nemocnice.infrastructure.Database
             UserInit userInit = new UserInit();
             User admin = userInit.GetAdmin();
             User manager = userInit.GetDoktor();
+            User pacient = userInit.GetPacient();
 
-            modelBuilder.Entity<User>().HasData(admin, manager);
+            modelBuilder.Entity<User>().HasData(admin, manager, pacient);
 
             UserRoleInit userRoleInit = new UserRoleInit();
             List<IdentityUserRole<int>> adminUserRole = userRoleInit.GetRolesForAdmin();
             List<IdentityUserRole<int>> DoktorUserRole = userRoleInit.GetRolesForDoktor();
+            List<IdentityUserRole<int>> PacientUserRole = userRoleInit.GetRolesForPacient();
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(userRoleInit.GetRolesForAdmin());
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(userRoleInit.GetRolesForDoktor());
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(userRoleInit.GetRolesForPacient());
         }
     }
 

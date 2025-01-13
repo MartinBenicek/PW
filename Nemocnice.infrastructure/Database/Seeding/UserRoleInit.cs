@@ -45,6 +45,19 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             };
             return doktorUserRoles;
         }
+
+        public List<IdentityUserRole<int>> GetRolesForPacient()
+        {
+            List<IdentityUserRole<int>> pacientUserRoles = new List<IdentityUserRole<int>>()
+            {
+                new IdentityUserRole<int>()
+                {
+                    UserId = 3,
+                    RoleId = 3
+                }
+            };
+            return pacientUserRoles;
+        }
     }
     
 }

@@ -62,5 +62,30 @@ namespace Nemocnice.Infrastructure.Database.Seeding
             };
             return doktor;
         }
+
+        public User GetPacient()
+        {
+            User user = new User()
+            {
+                Id = 3,
+                FirstName = "Honza",
+                LastName = "Veselý",
+                UserName = "pacient",
+                NormalizedUserName = "PACIENT",
+                Email = "pacient@pacient.cz",
+                NormalizedEmail = "PACIENT@PACIENT.CZ",
+                EmailConfirmed = true,
+                PasswordHash = "AQAAAAIAAYagAAAAEHALb2xi/d5J7lHhv1LNPj75CbkccxR4qSNMiJciACCDvekvRGXcKf/499OHMPdAsA==", //heslo: manager
+                SecurityStamp = "MAJXOSATJKOEM4YFF32Y5G2XPR5OFEL6",
+                ConcurrencyStamp = "7a8d96fd-5918-441b-b800-cbafa99de97b",
+                PhoneNumber = null,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnd = null,
+                LockoutEnabled = true,
+                AccessFailedCount = 0
+            };
+            return user;
+        }
     }
 }
