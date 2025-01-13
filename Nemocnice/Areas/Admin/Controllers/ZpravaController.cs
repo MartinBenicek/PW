@@ -42,6 +42,95 @@ namespace Nemocnice.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public IActionResult Create() //Stále NEFUNGUJE správně
+        {
+            return View(new KartaLekarskaZprava());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(KartaLekarskaZprava viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var lekarskaZprava = new LekarskaZprava
+                {
+                    Zprava = viewModel.LekarskaZprava.Zprava,
+                    Datum = viewModel.LekarskaZprava.Datum ?? DateTime.Now,
+                    KartaID = viewModel.Karta.KartaId
+                };
+
+                _context.LekarskaZprava.Add(lekarskaZprava);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Select));
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var zprava = _context.LekarskaZprava.FirstOrDefault(lz => lz.Id == id);
+            if (zprava == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new KartaLekarskaZprava
+            {
+                LekarskaZprava = new LekarskaZpravaViewModel
+                {
+                    LekarskaZpravaId = zprava.Id,
+                    Zprava = zprava.Zprava,
+                    Datum = zprava.Datum
+                },
+                Karta = new KartaViewModel
+                {
+                    KartaId = zprava.KartaID
+                }
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, KartaLekarskaZprava viewModel)
+        {
+            if (id != viewModel.LekarskaZprava.LekarskaZpravaId)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var zprava = _context.LekarskaZprava.FirstOrDefault(lz => lz.Id == id);
+                    if (zprava == null)
+                    {
+                        return NotFound();
+                    }
+
+                    zprava.Zprava = viewModel.LekarskaZprava.Zprava;
+                    zprava.Datum = viewModel.LekarskaZprava.Datum ?? DateTime.MinValue;
+                    zprava.KartaID = viewModel.Karta.KartaId;
+
+                    _context.LekarskaZprava.Update(zprava);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Select));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, $"An error occurred while updating the record: {ex.Message}");
+                }
+            }
+
+            return View(viewModel);
+        }
+
         public IActionResult Delete(int id)
         {
             var zprava = _context.LekarskaZprava.FirstOrDefault(lz => lz.Id == id);
@@ -56,25 +145,5 @@ namespace Nemocnice.Areas.Admin.Controllers
 
             return NotFound();
         }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(LekarskaZprava lekarskaZprava)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.LekarskaZprava.Add(lekarskaZprava);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Select));
-            }
-
-            return View(lekarskaZprava);
-        }
-
     }
 }

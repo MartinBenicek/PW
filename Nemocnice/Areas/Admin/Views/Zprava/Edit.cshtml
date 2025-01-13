@@ -14,7 +14,12 @@
         <input class="form-control" asp-for="LekarskaZprava.Zprava">
         <span asp-validation-for="LekarskaZprava.Zprava" class="text-danger"></span>
     </div>
-    
+    <div class="my-3">
+        <label class="form-label" asp-for="LekarskaZprava.Datum"></label>
+		<a href="C:\Users\Martin\Downloads\ZpravaController.cs">C:\Users\Martin\Downloads\ZpravaController.cs</a>        <input class="form-control" asp-for="LekarskaZprava.Datum" type="date">
+        <span asp-validation-for="LekarskaZprava.Datum" class="text-danger"></span>
+    </div>
+
     <a asp-action="Select" class="btn btn-primary">Back to List</a>
     <button type="submit" class="btn btn-success ms-3">Save</button>
 </form>
