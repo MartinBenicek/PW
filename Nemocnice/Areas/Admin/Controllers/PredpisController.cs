@@ -73,7 +73,6 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Validate the LekarskaZpravaId
                 var isLekarskaZpravaValid = _context.LekarskaZprava.Any(lz => lz.Id == viewModel.Predpis.LekarskaZpravaId);
                 if (!isLekarskaZpravaValid)
                 {
