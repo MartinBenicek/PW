@@ -35,10 +35,16 @@
                                 <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Predpis" asp-action="Select">Vaše léky</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Zprava" asp-action="Select">Lékařská zpráva</a>
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Zprava" asp-action="Select">Vaše zprávy</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Zprava" asp-action="Index">Lékařská zpráva solo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Prohlidky" asp-action="Index">Vaše Prohlídky solo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Pacient" asp-controller="Predpis" asp-action="Index">Vaše léky solo</a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Doktor))) && !(User.IsInRole(nameof(Roles.Admin))))
