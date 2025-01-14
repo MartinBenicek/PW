@@ -56,19 +56,32 @@ namespace Nemocnice.application.Implementation
 
         public void CreateProhlidka(ProhlidkyViewModel viewModel)
         {
-            var lekarskeSluzby = new LekarskeSluzby
+            try
             {
-                KartaID = viewModel.Karta.KartaId,
-                OrdinaceID = viewModel.Ordinace.OrdinaceId,
-                Ukon = viewModel.LekarskeSluzby.Ukon,
-                Vysetreni = viewModel.LekarskeSluzby.Vysetreni,
-                Ockovani = viewModel.LekarskeSluzby.Ockovani,
-                Datum = viewModel.LekarskeSluzby.Datum
-            };
+                Console.WriteLine("Creating new LekarskeSluzby");
+                Console.WriteLine($"KartaID: {viewModel.Karta.KartaId}, OrdinaceID: {viewModel.Ordinace.OrdinaceId}, Ukon: {viewModel.LekarskeSluzby.Ukon}, Vysetreni: {viewModel.LekarskeSluzby.Vysetreni}, Ockovani: {viewModel.LekarskeSluzby.Ockovani}, Datum: {viewModel.LekarskeSluzby.Datum}");
 
-            _context.LekarskeSluzby.Add(lekarskeSluzby);
-            _context.SaveChanges();
+                var lekarskeSluzby = new LekarskeSluzby
+                {
+                    KartaID = viewModel.Karta.KartaId,
+                    OrdinaceID = viewModel.Ordinace.OrdinaceId,
+                    Ukon = viewModel.LekarskeSluzby.Ukon ?? string.Empty,
+                    Vysetreni = viewModel.LekarskeSluzby.Vysetreni ?? string.Empty,
+                    Ockovani = viewModel.LekarskeSluzby.Ockovani ?? string.Empty,
+                    Datum = viewModel.LekarskeSluzby.Datum
+                };
+
+                _context.LekarskeSluzby.Add(lekarskeSluzby);
+                _context.SaveChanges();
+                Console.WriteLine("LekarskeSluzby created successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                throw;
+            }
         }
+
 
         public ProhlidkyViewModel GetProhlidkaById(int id)
         {

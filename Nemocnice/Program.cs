@@ -5,8 +5,14 @@ using Nemocnice.application.Implementation;
 using Microsoft.AspNetCore.Identity;
 using Nemocnice.infrastructure.Identity;
 using Nemocnice.application.Abstractions;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Pøidání logování
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 builder.Services.AddControllersWithViews();
 
