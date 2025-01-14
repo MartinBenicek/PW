@@ -34,6 +34,27 @@ namespace Nemocnice.application.Implementation
                     }).ToList();
         }
 
+        public List<KartaLekarskaZprava> SelectForUser(int userId)
+        {
+            return (from karta in _context.Karta
+                    join lekarskaZprava in _context.LekarskaZprava on karta.Id equals lekarskaZprava.KartaID
+                    where karta.PacientID == userId
+                    select new KartaLekarskaZprava
+                    {
+                        Karta = new KartaViewModel
+                        {
+                            KartaId = karta.Id,
+                            PacientId = karta.PacientID
+                        },
+                        LekarskaZprava = new LekarskaZpravaViewModel
+                        {
+                            LekarskaZpravaId = lekarskaZprava.Id,
+                            Zprava = lekarskaZprava.Zprava,
+                            Datum = lekarskaZprava.Datum
+                        }
+                    }).ToList();
+        }
+
         public void DeleteZprava(int id)
         {
             var zprava = _context.LekarskaZprava.FirstOrDefault(lz => lz.Id == id);

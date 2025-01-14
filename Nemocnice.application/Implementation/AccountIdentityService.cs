@@ -1,67 +1,65 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Nemocnice.application.Abstraction;
+﻿using Nemocnice.application.Abstractions;
 using Nemocnice.application.ViewModels;
+using Nemocnice.domain.Entities;
+using Nemocnice.infrastructure.Database;
 using Nemocnice.infrastructure.Identity.Enums;
+using Microsoft.AspNetCore.Identity;
+using Nemocnice.application.Abstraction;
 using Nemocnice.infrastructure.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Nemocnice.application.Implementation
+public class AccountService : IAccountService
 {
-    public class AccountIdentityService : IAccountService
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly IKartaService _kartaService;
+
+    public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IKartaService kartaService)
     {
-        UserManager<User> userManager;
-        SignInManager<User> sigInManager;
-        public AccountIdentityService(UserManager<User> userManager, SignInManager<User> sigInManager)
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _kartaService = kartaService;
+    }
+
+    public async Task<string[]> Register(RegisterViewModel vm, params Roles[] roles)
+    {
+        var user = new User
         {
-            this.userManager = userManager;
-            this.sigInManager = sigInManager;
-        }
-        public async Task<bool> Login(LoginViewModel vm)
+            UserName = vm.Username,
+            Email = vm.Email,
+            FirstName = vm.FirstName,
+            LastName = vm.LastName,
+            PhoneNumber = vm.Phone
+        };
+
+        var result = await _userManager.CreateAsync(user, vm.Password);
+        if (result.Succeeded)
         {
-            var result = await sigInManager.PasswordSignInAsync(vm.Username, vm.Password, true, true);
-            return result.Succeeded;
+            await _userManager.AddToRolesAsync(user, roles.Select(r => r.ToString()));
+            await CreateKartaForUser(user.Id);
+            return null;
         }
-        public Task Logout()
+
+        return result.Errors.Select(e => e.Description).ToArray();
+    }
+
+    public async Task<bool> Login(LoginViewModel vm)
+    {
+        var result = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, false, false);
+        return result.Succeeded;
+    }
+
+    public async Task Logout()
+    {
+        await _signInManager.SignOutAsync();
+    }
+
+    public async Task CreateKartaForUser(int userId)
+    {
+        var karta = new Karta
         {
-            return sigInManager.SignOutAsync();
-        }
-        public async Task<string[]> Register(RegisterViewModel vm, params Roles[] roles)
-        {
-            User user = new User()
-            {
-                UserName = vm.Username,
-                FirstName = vm.FirstName,
-                LastName = vm.LastName,
-                Email = vm.Email,
-                PhoneNumber = vm.Phone
-            };
-            string[] errors = null;
-            var result = await userManager.CreateAsync(user, vm.Password);
-            if (result.Succeeded)
-            {
-                foreach (var role in roles)
-                {
-                    var resultRole = await userManager.AddToRoleAsync(user, role.ToString());
-                    if (resultRole.Succeeded == false)
-                    {
-                        for (int i = 0; i < result.Errors.Count(); ++i)
-                            result.Errors.Append(result.Errors.ElementAt(i));
-                    }
-                }
-            }
-            if (result.Errors != null && result.Errors.Count() > 0)
-            {
-                errors = new string[result.Errors.Count()];
-                for (int i = 0; i < result.Errors.Count(); ++i)
-                {
-                    errors[i] = result.Errors.ElementAt(i).Description;
-                }
-            }
-            return errors;
-        }
+            PacientID = userId
+        };
+
+        await _kartaService.CreateKarta(karta);
     }
 }

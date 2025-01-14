@@ -10,6 +10,7 @@ namespace Nemocnice.application.Abstractions
     public interface IZpravaService
     {
         List<KartaLekarskaZprava> GetZpravy();
+        List<KartaLekarskaZprava> SelectForUser(int userId);
         void DeleteZprava(int id);
         void CreateZprava(KartaLekarskaZprava viewModel);
         KartaLekarskaZprava GetZpravaById(int id);

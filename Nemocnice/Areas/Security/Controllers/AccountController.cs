@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nemocnice.application.Abstraction;
+using Nemocnice.application.Abstractions;
 using Nemocnice.application.ViewModels;
 using Nemocnice.Controllers;
 using Nemocnice.infrastructure.Identity.Enums;
@@ -10,15 +11,18 @@ namespace Nemocnice.Areas.Security.Controllers
     [Area("Security")]
     public class AccountController : Controller
     {
-        IAccountService _accountService;
-        public AccountController(IAccountService security)
+        private readonly IAccountService _accountService;
+
+        public AccountController(IAccountService accountService)
         {
-            _accountService = security;
+            _accountService = accountService;
         }
+
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerVM)
         {
@@ -40,7 +44,11 @@ namespace Nemocnice.Areas.Security.Controllers
                 }
                 else
                 {
-                    //errors to logger
+                    // Log errors
+                    foreach (var error in errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error);
+                    }
                 }
             }
             return View(registerVM);

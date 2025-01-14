@@ -41,15 +41,15 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IKartaService, KartaService>();
 builder.Services.AddScoped<IProhlidkyService, ProhlidkyService>();
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<ILekarskeSluzbyService, LekarskeSluzbyAppService>();
-builder.Services.AddScoped<IKartaService, KartaAppService>();
 builder.Services.AddScoped<IOrdinaceService, OrdinaceAppService>();
 builder.Services.AddScoped<IZpravaService, ZpravaService>();
 builder.Services.AddScoped<IPredpisService, PredpisService>();
 builder.Services.AddScoped<ILekarskaZpravaService, LekarskaZpravaService>();
-builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();
 
 var app = builder.Build();

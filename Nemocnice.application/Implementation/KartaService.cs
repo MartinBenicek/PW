@@ -1,22 +1,20 @@
 ﻿using Nemocnice.application.Abstraction;
+using Nemocnice.application.Abstractions;
 using Nemocnice.domain.Entities;
 using Nemocnice.infrastructure.Database;
 
-namespace Nemocnice.application.Implementation
+public class KartaService : IKartaService
 {
+    private readonly NemocniceDbContext _context;
 
-    public class KartaAppService : IKartaService
+    public KartaService(NemocniceDbContext context)
     {
-        private readonly NemocniceDbContext _NemocniceDbContext;
-        public KartaAppService(NemocniceDbContext NemocniceDbContext)
-        {
-            _NemocniceDbContext = NemocniceDbContext;
-        }
-
-        public IList<Karta> Select()
-        {
-            return _NemocniceDbContext.Karta.ToList();
-        }
+        _context = context;
     }
-    
+
+    public async Task CreateKarta(Karta karta)
+    {
+        _context.Karta.Add(karta);
+        await _context.SaveChangesAsync();
+    }
 }

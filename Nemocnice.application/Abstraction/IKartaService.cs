@@ -9,6 +9,6 @@ namespace Nemocnice.application.Abstraction
 {
     public interface IKartaService
     {
-        IList<Karta> Select();
+        Task CreateKarta(Karta karta);
     }
 }
