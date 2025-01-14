@@ -5,6 +5,7 @@
 <form asp-area="Admin" asp-controller="Predpis" asp-action="Edit" method="post">
     <input asp-for="Predpis.Id" type="hidden" />
     <input asp-for="LekarskaZprava.LekarskaZpravaId" type="hidden" />
+    <input asp-for="Predpis.LekarskaZpravaId" type="hidden" />
 
     <div class="form-group my-3">
         <label asp-for="Predpis.NazevLeku"></label>

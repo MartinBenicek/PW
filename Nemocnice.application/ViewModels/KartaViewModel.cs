@@ -11,4 +11,5 @@ namespace Nemocnice.application.ViewModels
         public int KartaId { get; set; }
         public int PacientId { get; set; }
     }
+
 }

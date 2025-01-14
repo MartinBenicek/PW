@@ -8,7 +8,7 @@ namespace Nemocnice.application.ViewModels
 {
     public class LekarskaZpravaPredpisViewModel
     {
-        public LekarskaZpravaViewModel LekarskaZprava { get; set; }
-        public PredpisViewModel Predpis { get; set; }
+        public LekarskaZpravaViewModel? LekarskaZprava { get; set; }
+        public PredpisViewModel? Predpis { get; set; }
     }
 }

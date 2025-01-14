@@ -8,7 +8,7 @@ namespace Nemocnice.application.ViewModels
 {
     public class KartaPredpisViewModel
     {
-        public KartaViewModel Karta { get; set; }
-        public PredpisViewModel Predpis { get; set; }
+        public KartaViewModel? Karta { get; set; }
+        public PredpisViewModel? Predpis { get; set; }
     }
 }

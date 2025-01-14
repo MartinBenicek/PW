@@ -1,46 +1,47 @@
-﻿@model Nemocnice.application.ViewModels.ProhlidkyViewModel
+﻿@model ProhlidkyViewModel
 
-<h1>Edit Prohlidka</h1>
+<h2>Edit Prohlidka</h2>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="LekarskeSluzby.LekarskeSluzbyId" />
+<form asp-area="Admin" asp-controller="Prohlidky" asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="LekarskeSluzby.LekarskeSluzbyId" type="hidden" />
 
-    <div class="mb-3">
-        <label class="form-label" asp-for="Karta.KartaId"></label>
-        <input class="form-control" asp-for="Karta.KartaId">
+    <div class="form-group my-3">
+        <label asp-for="Karta.KartaId"></label>
+        <input asp-for="Karta.KartaId" class="form-control" />
         <span asp-validation-for="Karta.KartaId" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label" asp-for="Ordinace.OrdinaceId"></label>
-        <input class="form-control" asp-for="Ordinace.OrdinaceId">
+    <div class="form-group my-3">
+        <label asp-for="Ordinace.OrdinaceId"></label>
+        <input asp-for="Ordinace.OrdinaceId" class="form-control" />
         <span asp-validation-for="Ordinace.OrdinaceId" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label" asp-for="LekarskeSluzby.Ukon"></label>
-        <input class="form-control" asp-for="LekarskeSluzby.Ukon">
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Ukon"></label>
+        <input asp-for="LekarskeSluzby.Ukon" class="form-control" />
         <span asp-validation-for="LekarskeSluzby.Ukon" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label" asp-for="LekarskeSluzby.Vysetreni"></label>
-        <input class="form-control" asp-for="LekarskeSluzby.Vysetreni">
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Vysetreni"></label>
+        <input asp-for="LekarskeSluzby.Vysetreni" class="form-control" />
         <span asp-validation-for="LekarskeSluzby.Vysetreni" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label" asp-for="LekarskeSluzby.Ockovani"></label>
-        <input class="form-control" asp-for="LekarskeSluzby.Ockovani">
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Ockovani"></label>
+        <input asp-for="LekarskeSluzby.Ockovani" class="form-control" />
         <span asp-validation-for="LekarskeSluzby.Ockovani" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label class="form-label" asp-for="LekarskeSluzby.Datum"></label>
-        <input class="form-control" asp-for="LekarskeSluzby.Datum" type="date">
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Datum"></label>
+        <input asp-for="LekarskeSluzby.Datum" class="form-control" />
         <span asp-validation-for="LekarskeSluzby.Datum" class="text-danger"></span>
     </div>
 
     <a asp-action="Select" class="btn btn-primary">Back to List</a>
-    <button type="submit" class="btn btn-success ms-3">Save</button>
+    <button type="submit" class="btn btn-success">Edit</button>
 </form>

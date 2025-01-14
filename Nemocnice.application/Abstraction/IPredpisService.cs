@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nemocnice.domain.Entities;
+﻿using Nemocnice.application.ViewModels;
 
-namespace Nemocnice.application.Abstraction
+namespace Nemocnice.application.Abstractions
 {
     public interface IPredpisService
     {
-        IList<Predpis> Select();
+        List<LekarskaZpravaPredpisViewModel> GetPredpisy();
+        void DeletePredpis(int id);
+        void CreatePredpis(PredpisViewModel viewModel);
+        PredpisViewModel GetPredpisById(int id);
+        void UpdatePredpis(PredpisViewModel viewModel);
     }
 }

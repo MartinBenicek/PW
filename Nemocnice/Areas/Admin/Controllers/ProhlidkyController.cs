@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nemocnice.application.Abstractions;
 using Nemocnice.application.ViewModels;
-using Nemocnice.domain.Entities;
-using Nemocnice.infrastructure.Database;
 using Nemocnice.infrastructure.Identity.Enums;
 
 namespace Nemocnice.Areas.Admin.Controllers
@@ -11,59 +10,18 @@ namespace Nemocnice.Areas.Admin.Controllers
     [Authorize(Roles = nameof(Roles.Admin))]
     public class ProhlidkyController : Controller
     {
-        private readonly NemocniceDbContext _context;
+        private readonly IProhlidkyService _prohlidkyService;
 
-        public ProhlidkyController(NemocniceDbContext context)
+        public ProhlidkyController(IProhlidkyService prohlidkyService)
         {
-            _context = context;
+            _prohlidkyService = prohlidkyService;
         }
 
         [HttpGet]
         public IActionResult Select()
         {
-            var prohlidky = (from karta in _context.Karta
-                             join sluzby in _context.LekarskeSluzby on karta.Id equals sluzby.KartaID
-                             join ordinace in _context.Ordinace on sluzby.OrdinaceID equals ordinace.Id
-                             select new ProhlidkyViewModel
-                             {
-                                 Karta = new KartaViewModel
-                                 {
-                                     KartaId = karta.Id,
-                                     PacientId = karta.PacientID
-                                 },
-                                 LekarskeSluzby = new LekarskeSluzbyViewModel
-                                 {
-                                     LekarskeSluzbyId = sluzby.Id,
-                                     Ukon = sluzby.Ukon,
-                                     Vysetreni = sluzby.Vysetreni,
-                                     Ockovani = sluzby.Ockovani,
-                                     Datum = sluzby.Datum
-                                 },
-                                 Ordinace = new OrdinaceViewModel
-                                 {
-                                     OrdinaceId = ordinace.Id,
-                                     Budova = ordinace.Budova,
-                                     Mistnost = ordinace.Mistnost,
-                                     DoktorId = ordinace.DoktorID
-                                 }
-                             }).ToList();
-
+            var prohlidky = _prohlidkyService.GetProhlidky();
             return View(prohlidky);
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var sluzba = _context.LekarskeSluzby.FirstOrDefault(lz => lz.Id == id);
-
-            if (sluzba != null)
-            {
-                _context.LekarskeSluzby.Remove(sluzba);
-                _context.SaveChanges();
-
-                return RedirectToAction(nameof(Select));
-            }
-
-            return NotFound();
         }
 
         [HttpGet]
@@ -77,30 +35,18 @@ namespace Nemocnice.Areas.Admin.Controllers
             });
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ProhlidkyViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel); // Vrátí zpět formulář s chybami
+                return View(viewModel);
             }
 
             try
             {
-                var lekarskeSluzby = new LekarskeSluzby
-                {
-                    KartaID = viewModel.Karta.KartaId,
-                    OrdinaceID = viewModel.Ordinace.OrdinaceId,
-                    Ukon = viewModel.LekarskeSluzby.Ukon,
-                    Vysetreni = viewModel.LekarskeSluzby.Vysetreni,
-                    Ockovani = viewModel.LekarskeSluzby.Ockovani,
-                    Datum = viewModel.LekarskeSluzby.Datum
-                };
-
-                _context.LekarskeSluzby.Add(lekarskeSluzby);
-                _context.SaveChanges();
+                _prohlidkyService.CreateProhlidka(viewModel);
                 return RedirectToAction(nameof(Select));
             }
             catch (Exception ex)
@@ -113,34 +59,7 @@ namespace Nemocnice.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var sluzba = (from karta in _context.Karta
-                          join sluzby in _context.LekarskeSluzby on karta.Id equals sluzby.KartaID
-                          join ordinace in _context.Ordinace on sluzby.OrdinaceID equals ordinace.Id
-                          where sluzby.Id == id
-                          select new ProhlidkyViewModel
-                          {
-                              Karta = new KartaViewModel
-                              {
-                                  KartaId = karta.Id,
-                                  PacientId = karta.PacientID
-                              },
-                              LekarskeSluzby = new LekarskeSluzbyViewModel
-                              {
-                                  LekarskeSluzbyId = sluzby.Id,
-                                  Ukon = sluzby.Ukon,
-                                  Vysetreni = sluzby.Vysetreni,
-                                  Ockovani = sluzby.Ockovani,
-                                  Datum = sluzby.Datum
-                              },
-                              Ordinace = new OrdinaceViewModel
-                              {
-                                  OrdinaceId = ordinace.Id,
-                                  Budova = ordinace.Budova,
-                                  Mistnost = ordinace.Mistnost,
-                                  DoktorId = ordinace.DoktorID
-                              }
-                          }).FirstOrDefault();
-
+            var sluzba = _prohlidkyService.GetProhlidkaById(id);
             if (sluzba == null)
             {
                 return NotFound();
@@ -158,26 +77,9 @@ namespace Nemocnice.Areas.Admin.Controllers
                 return View(viewModel);
             }
 
-            var sluzba = _context.LekarskeSluzby.FirstOrDefault(lz => lz.Id == viewModel.LekarskeSluzby.LekarskeSluzbyId);
-
-            if (sluzba == null)
-            {
-                ModelState.AddModelError("", "Záznam nebyl nalezen.");
-                return View(viewModel);
-            }
-
             try
             {
-                sluzba.Ukon = viewModel.LekarskeSluzby.Ukon;
-                sluzba.Vysetreni = viewModel.LekarskeSluzby.Vysetreni;
-                sluzba.Ockovani = viewModel.LekarskeSluzby.Ockovani;
-                sluzba.Datum = viewModel.LekarskeSluzby.Datum;
-                sluzba.KartaID = viewModel.Karta.KartaId;
-                sluzba.OrdinaceID = viewModel.Ordinace.OrdinaceId;
-
-                _context.LekarskeSluzby.Update(sluzba);
-                _context.SaveChanges();
-
+                _prohlidkyService.UpdateProhlidka(viewModel);
                 return RedirectToAction(nameof(Select));
             }
             catch (Exception ex)
@@ -187,5 +89,10 @@ namespace Nemocnice.Areas.Admin.Controllers
             }
         }
 
+        public IActionResult Delete(int id)
+        {
+            _prohlidkyService.DeleteProhlidka(id);
+            return RedirectToAction(nameof(Select));
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Nemocnice.application.ViewModels
 {
     public class KartaLekarskaZprava
     {
-        public KartaViewModel Karta { get; set; }
-        public LekarskaZpravaViewModel LekarskaZprava { get; set; }
+        public KartaViewModel? Karta { get; set; }
+        public LekarskaZpravaViewModel? LekarskaZprava { get; set; }
     }
 }

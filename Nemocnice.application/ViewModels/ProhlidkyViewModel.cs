@@ -8,8 +8,8 @@ namespace Nemocnice.application.ViewModels
 {
     public class ProhlidkyViewModel
     {
+        public KartaViewModel Karta { get; set; }
         public OrdinaceViewModel Ordinace { get; set; }
         public LekarskeSluzbyViewModel LekarskeSluzby { get; set; }
-        public KartaViewModel Karta { get; set; }
     }
 }

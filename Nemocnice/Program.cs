@@ -4,6 +4,7 @@ using Nemocnice.application.Abstraction;
 using Nemocnice.application.Implementation;
 using Microsoft.AspNetCore.Identity;
 using Nemocnice.infrastructure.Identity;
+using Nemocnice.application.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,11 +41,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<IProhlidkyService, ProhlidkyService>();
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<ILekarskeSluzbyService, LekarskeSluzbyAppService>();
 builder.Services.AddScoped<IKartaService, KartaAppService>();
 builder.Services.AddScoped<IOrdinaceService, OrdinaceAppService>();
-builder.Services.AddScoped<IPredpisService, PredpisAppService>();
+builder.Services.AddScoped<IZpravaService, ZpravaService>();
+builder.Services.AddScoped<IPredpisService, PredpisService>();
 builder.Services.AddScoped<ILekarskaZpravaService, LekarskaZpravaService>();
 builder.Services.AddScoped<IAccountService, AccountIdentityService>();
 builder.Services.AddScoped<ISecurityService, SecurityIdentityService>();

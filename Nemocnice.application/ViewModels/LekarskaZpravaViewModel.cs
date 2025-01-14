@@ -8,9 +8,9 @@ namespace Nemocnice.application.ViewModels
 {
     public class LekarskaZpravaViewModel
     {
-        public int LekarskaZpravaId { get; set; }
+        public int? LekarskaZpravaId { get; set; }
         public string? Zprava { get; set; }
         public DateTime? Datum { get; set; }
-        public int KartaId { get; set; }
+        public int? KartaId { get; set; }
     }
 }
