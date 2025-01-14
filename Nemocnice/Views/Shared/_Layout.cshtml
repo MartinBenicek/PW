@@ -58,6 +58,15 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Zprava" asp-action="Select">Zprávy pacientů</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Prohlidky" asp-action="Index">Prohlídky pacientů solo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Predpis" asp-action="Index">Léky pacientů solo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Doktor" asp-controller="Zprava" asp-action="Index">Zprávy pacientů solo</a>
+                            </li>
                         }
                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(nameof(Roles.Admin))))
                         {

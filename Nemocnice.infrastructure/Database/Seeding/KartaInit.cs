@@ -10,6 +10,7 @@ namespace Nemocnice.Infrastructure.Database.Seeding
 
             kartas.Add(new Karta() { Id = 1, PacientID = 1 });
             kartas.Add(new Karta() { Id = 2, PacientID = 2 });
+            kartas.Add(new Karta() { Id = 3, PacientID = 3 });
             
             return kartas;
         }

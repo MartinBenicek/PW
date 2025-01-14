@@ -1,0 +1,39 @@
+﻿@model IList<Nemocnice.application.ViewModels.LekarskaZpravaPredpisViewModel>
+
+@section Styles
+{
+        <link rel="stylesheet" href="~/css/predpis.css" />
+}
+
+<a asp-action="Create" class="btn btn-info mb-3">Create předpis</a>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Předpis ID</th>
+                <th>Typ Léku</th>
+                <th>Název Léku</th>
+                <th>Čas podání</th>
+                <th>Lékařská zpráva ID</th>
+                <th>Zpráva</th>
+                <th>Datum</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var predpis in Model)
+            {
+                    <tr>
+                        <td>@predpis.Predpis.Id</td>
+                        <td>@predpis.Predpis.TypLeku</td>
+                        <td>@predpis.Predpis.NazevLeku</td>
+                        <td>@predpis.Predpis.CasPodani</td>
+                        <td>@predpis.LekarskaZprava.LekarskaZpravaId</td>
+                        <td>@predpis.LekarskaZprava.Zprava</td>
+                        <td>@predpis.LekarskaZprava.Datum</td>
+                    <td><a asp-action="Edit" asp-route-id="@predpis.Predpis.Id" class="btn btn-warning">Edit</a></td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+</div>

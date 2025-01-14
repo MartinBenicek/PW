@@ -1,0 +1,35 @@
+﻿@model IList<Nemocnice.application.ViewModels.KartaLekarskaZprava>
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/zprava.css" />
+}
+
+<a asp-action="Create" class="btn btn-info mb-3">Create lékařská zpráva</a>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Karta ID</th>
+                <th>Pacient ID</th>
+                <th>Lékařská zpráva ID</th>
+                <th>Zpráva</th>
+                <th>Datum</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var zprava in Model)
+            {
+                <tr>
+                    <td>@zprava.Karta.KartaId</td>
+                    <td>@zprava.Karta.PacientId</td>
+                    <td>@zprava.LekarskaZprava.LekarskaZpravaId</td>
+                    <td>@zprava.LekarskaZprava.Zprava</td>
+                    <td>@zprava.LekarskaZprava.Datum</td>
+                    <td><a asp-action="Edit" asp-route-id="@zprava.LekarskaZprava.LekarskaZpravaId" class="btn btn-warning">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -5,6 +5,8 @@ using Nemocnice.domain.Entities;
 using Nemocnice.infrastructure.Identity.Enums;
 using Nemocnice.application.ViewModels;
 using Nemocnice.infrastructure.Database;
+using Nemocnice.application.Abstractions;
+using System.Security.Claims;
 
 namespace Nemocnice.Areas.Doktor.Controllers
 {
@@ -12,34 +14,26 @@ namespace Nemocnice.Areas.Doktor.Controllers
     [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doktor))]
     public class ZpravaController : Controller
     {
-        private readonly NemocniceDbContext _context;
+        private readonly IZpravaService _zpravaService;
 
-        public ZpravaController(NemocniceDbContext context)
+        public ZpravaController(IZpravaService zpravaService)
         {
-            _context = context;
+            _zpravaService = zpravaService;
         }
 
         [HttpGet]
         public IActionResult Select()
         {
-            var viewModel = (from karta in _context.Karta
-                             join lekarskaZprava in _context.LekarskaZprava on karta.Id equals lekarskaZprava.KartaID
-                             select new KartaLekarskaZprava
-                             {
-                                 Karta = new KartaViewModel
-                                 {
-                                     KartaId = karta.Id,
-                                     PacientId = karta.PacientID
-                                 },
-                                 LekarskaZprava = new LekarskaZpravaViewModel
-                                 {
-                                     LekarskaZpravaId = lekarskaZprava.Id,
-                                     Zprava = lekarskaZprava.Zprava,
-                                     Datum = lekarskaZprava.Datum
-                                 }
-                             })
-                             .ToList();
+            var viewModel = _zpravaService.GetZpravy();
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var doctorId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var zpravy = _zpravaService.SelectForDoctor(doctorId);
+            return View(zpravy);
         }
     }
 }

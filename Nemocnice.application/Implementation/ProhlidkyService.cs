@@ -75,6 +75,37 @@ namespace Nemocnice.application.Implementation
                     }).ToList();
         }
 
+        public List<ProhlidkyViewModel> SelectForDoctor(int doctorId)
+        {
+            return (from karta in _context.Karta
+                    join sluzby in _context.LekarskeSluzby on karta.Id equals sluzby.KartaID
+                    join ordinace in _context.Ordinace on sluzby.OrdinaceID equals ordinace.Id
+                    where ordinace.DoktorID == doctorId
+                    select new ProhlidkyViewModel
+                    {
+                        Karta = new KartaViewModel
+                        {
+                            KartaId = karta.Id,
+                            PacientId = karta.PacientID
+                        },
+                        LekarskeSluzby = new LekarskeSluzbyViewModel
+                        {
+                            LekarskeSluzbyId = sluzby.Id,
+                            Ukon = sluzby.Ukon,
+                            Vysetreni = sluzby.Vysetreni,
+                            Ockovani = sluzby.Ockovani,
+                            Datum = sluzby.Datum
+                        },
+                        Ordinace = new OrdinaceViewModel
+                        {
+                            OrdinaceId = ordinace.Id,
+                            Budova = ordinace.Budova,
+                            Mistnost = ordinace.Mistnost,
+                            DoktorId = ordinace.DoktorID
+                        }
+                    }).ToList();
+        }
+
         public void DeleteProhlidka(int id)
         {
             var sluzba = _context.LekarskeSluzby.FirstOrDefault(lz => lz.Id == id);

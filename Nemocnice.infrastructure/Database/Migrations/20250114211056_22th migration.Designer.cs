@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nemocnice.infrastructure.Database;
 
@@ -11,9 +12,11 @@ using Nemocnice.infrastructure.Database;
 namespace Nemocnice.infrastructure.Migrations
 {
     [DbContext(typeof(NemocniceDbContext))]
-    partial class NemocniceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250114211056_22th migration")]
+    partial class _22thmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,7 +173,7 @@ namespace Nemocnice.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Karta", (string)null);
+                    b.ToTable("Karta");
 
                     b.HasData(
                         new
@@ -209,7 +212,7 @@ namespace Nemocnice.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LekarskaZprava", (string)null);
+                    b.ToTable("LekarskaZprava");
 
                     b.HasData(
                         new
@@ -256,7 +259,7 @@ namespace Nemocnice.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LekarskeSluzby", (string)null);
+                    b.ToTable("LekarskeSluzby");
 
                     b.HasData(
                         new
@@ -312,7 +315,7 @@ namespace Nemocnice.infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ordinace", (string)null);
+                    b.ToTable("Ordinace");
 
                     b.HasData(
                         new
@@ -365,7 +368,7 @@ namespace Nemocnice.infrastructure.Migrations
 
                     b.HasIndex("LekarskaZpravaID");
 
-                    b.ToTable("Predpis", (string)null);
+                    b.ToTable("Predpis");
 
                     b.HasData(
                         new

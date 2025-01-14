@@ -6,6 +6,8 @@ using Nemocnice.infrastructure.Identity.Enums;
 using Nemocnice.application.ViewModels;
 using Nemocnice.infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
+using Nemocnice.application.Abstractions;
+using System.Security.Claims;
 
 namespace Nemocnice.Areas.Doktor.Controllers
 {
@@ -13,37 +15,26 @@ namespace Nemocnice.Areas.Doktor.Controllers
     [Authorize(Roles = nameof(Roles.Admin) + ", " + nameof(Roles.Doktor))]
     public class PredpisController : Controller
     {
-        NemocniceDbContext _context;
+        private readonly IPredpisService _predpisService;
 
-        public PredpisController(NemocniceDbContext context)
+        public PredpisController(IPredpisService predpisService)
         {
-            _context = context;
+            _predpisService = predpisService;
         }
 
         [HttpGet]
         public IActionResult Select()
         {
-            var viewModel = (from karta in _context.Karta
-                             join lekarskaZprava in _context.LekarskaZprava on karta.Id equals lekarskaZprava.KartaID
-                             join predpis in _context.Predpis on lekarskaZprava.Id equals predpis.LekarskaZpravaID
-                             select new KartaPredpisViewModel
-                             {
-                                 Karta = new KartaViewModel
-                                 {
-                                     KartaId = karta.Id,
-                                     PacientId = karta.PacientID
-                                 },
-                                 Predpis = new PredpisViewModel
-                                 {
-                                     Id = predpis.Id,
-                                     TypLeku = predpis.TypLeku,
-                                     NazevLeku = predpis.NazevLeku,
-                                     CasPodani = predpis.CasPodani
-                                 }
-                             })
-                             .ToList();
-
+            var viewModel = _predpisService.GetPredpisy();
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var doctorId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var predpisy = _predpisService.SelectForDoctor(doctorId);
+            return View(predpisy);
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Nemocnice.application.Abstractions
     {
         List<LekarskaZpravaPredpisViewModel> GetPredpisy();
         List<LekarskaZpravaPredpisViewModel> SelectForUser(int userId);
+        List<LekarskaZpravaPredpisViewModel> SelectForDoctor(int doctorId);
         void DeletePredpis(int id);
         void CreatePredpis(PredpisViewModel viewModel);
         PredpisViewModel GetPredpisById(int id);

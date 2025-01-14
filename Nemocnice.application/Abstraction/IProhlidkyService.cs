@@ -11,6 +11,7 @@ namespace Nemocnice.application.Abstractions
     {
         List<ProhlidkyViewModel> GetProhlidky();
         List<ProhlidkyViewModel> SelectForUser(int userId);
+        List<ProhlidkyViewModel> SelectForDoctor(int doctorId);
         void DeleteProhlidka(int id);
         void CreateProhlidka(ProhlidkyViewModel viewModel);
         ProhlidkyViewModel GetProhlidkaById(int id);

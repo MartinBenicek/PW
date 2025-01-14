@@ -11,6 +11,7 @@ namespace Nemocnice.application.Abstractions
     {
         List<KartaLekarskaZprava> GetZpravy();
         List<KartaLekarskaZprava> SelectForUser(int userId);
+        List<KartaLekarskaZprava> SelectForDoctor(int doctorId);
         void DeleteZprava(int id);
         void CreateZprava(KartaLekarskaZprava viewModel);
         KartaLekarskaZprava GetZpravaById(int id);

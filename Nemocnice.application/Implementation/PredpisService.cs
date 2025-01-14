@@ -64,6 +64,32 @@ namespace Nemocnice.application.Implementation
                     }).ToList();
         }
 
+        public List<LekarskaZpravaPredpisViewModel> SelectForDoctor(int doctorId)
+        {
+            return (from predpis in _context.Predpis
+                    join zprava in _context.LekarskaZprava on predpis.LekarskaZpravaID equals zprava.Id
+                    join ordinace in _context.Ordinace on zprava.KartaID equals ordinace.Id
+                    where ordinace.DoktorID == doctorId
+                    select new LekarskaZpravaPredpisViewModel
+                    {
+                        Predpis = new PredpisViewModel
+                        {
+                            Id = predpis.Id,
+                            TypLeku = predpis.TypLeku,
+                            NazevLeku = predpis.NazevLeku,
+                            CasPodani = predpis.CasPodani,
+                            LekarskaZpravaId = predpis.LekarskaZpravaID
+                        },
+                        LekarskaZprava = new LekarskaZpravaViewModel
+                        {
+                            LekarskaZpravaId = zprava.Id,
+                            Zprava = zprava.Zprava,
+                            Datum = zprava.Datum,
+                            KartaId = zprava.KartaID
+                        }
+                    }).ToList();
+        }
+
         public void DeletePredpis(int id)
         {
             var predpis = _context.Predpis.FirstOrDefault(p => p.Id == id);
