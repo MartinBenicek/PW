@@ -1,0 +1,28 @@
+﻿@model Nemocnice.application.ViewModels.PredpisViewModel
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="TypLeku" class="control-label"></label>
+        <input asp-for="TypLeku" class="form-control" />
+        <span asp-validation-for="TypLeku" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NazevLeku" class="control-label"></label>
+        <input asp-for="NazevLeku" class="form-control" />
+        <span asp-validation-for="NazevLeku" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CasPodani" class="control-label"></label>
+        <input asp-for="CasPodani" class="form-control" />
+        <span asp-validation-for="CasPodani" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LekarskaZpravaId" class="control-label"></label>
+        <input asp-for="LekarskaZpravaId" class="form-control" />
+        <span asp-validation-for="LekarskaZpravaId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
