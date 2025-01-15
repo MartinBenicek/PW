@@ -29,7 +29,7 @@
                     <td>@item.Karta.PacientId</td>
                     <td>@item.LekarskaZprava.LekarskaZpravaId</td>
                     <td>@item.LekarskaZprava.Zprava</td>
-                    <td>@item.LekarskaZprava.Datum?.ToString("dd.MM.yyyy")</td>
+                    <td>@item.LekarskaZprava.Datum.ToString("dd.MM.yyyy")</td>
                     <td><a asp-action="Edit" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-warning btn-sm">Edit</a></td>
                     <td><a asp-action="Delete" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a></td>
                 </tr>
