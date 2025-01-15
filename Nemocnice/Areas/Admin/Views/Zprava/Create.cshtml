@@ -1,16 +1,24 @@
 ﻿@model Nemocnice.application.ViewModels.KartaLekarskaZprava
 
-<form asp-action="Create" method="post">
-    <div class="form-group my-3">
-        <label asp-for="LekarskaZprava.Zprava" class="control-label"></label>
-        <input asp-for="LekarskaZprava.Zprava" class="form-control" />
-        <span asp-validation-for="LekarskaZprava.Zprava" class="text-danger"></span>
-    </div>
-    <div class="form-group my-3">
-        <label asp-for="Karta.KartaId" class="control-label"></label>
-        <input asp-for="Karta.KartaId" class="form-control" />
-        <span asp-validation-for="Karta.KartaId" class="text-danger"></span>
-    </div>
-    <a asp-action="Select" class="btn btn-primary">Back to List</a>
-    <input type="submit" value="Create" class="btn btn-success" />
-</form>
+<h2 class="text-center my-4">Create Zpráva</h2>
+
+<div class="container">
+    <form asp-action="Create" method="post">
+        <div class="row mb-3">
+            <div class="mb-3">
+                <label asp-for="Karta.KartaId" class="control-label">Karta ID</label>
+                <input asp-for="Karta.KartaId" class="form-control" />
+                <span asp-validation-for="Karta.KartaId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LekarskaZprava.Zprava" class="control-label">Zpráva</label>
+                <input asp-for="LekarskaZprava.Zprava" class="form-control" />
+                <span asp-validation-for="LekarskaZprava.Zprava" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a asp-action="Select" class="btn btn-primary">Back to List</a>
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </form>
+</div>

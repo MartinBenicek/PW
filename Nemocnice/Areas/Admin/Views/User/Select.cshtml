@@ -4,52 +4,49 @@
     ViewData["Title"] = "Administrace Uživatelů";
     User myUser = new User();
 }
+
 <h1>@ViewData["Title"]</h1>
 
-<a asp-action="Create" class="btn btn-info my-3">Create User</a>
+<a asp-action="Create" class="btn btn-success my-3">Create User</a>
 
-@{
-    if (Model != null && Model.Count > 0)
-    {
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">@nameof(myUser.Id)</th>
+                    <th scope="col">@nameof(myUser.FirstName)</th>
+                    <th scope="col">@nameof(myUser.LastName)</th>
+                    <th scope="col">@nameof(myUser.UserName)</th>
+                    <th scope="col">@nameof(myUser.Email)</th>
+                    <th scope="col">@nameof(myUser.PhoneNumber)</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; ++i)
+                {
+                    User user = Model[i];
                     <tr>
-                        <th scope="col" class="p-3">@nameof(myUser.Id)</th>
-                        <th scope="col" class="p-3">@nameof(myUser.FirstName)</th>
-                        <th scope="col" class="p-3">@nameof(myUser.LastName)</th>
-                        <th scope="col" class="p-3">@nameof(myUser.UserName)</th>
-                        <th scope="col" class="p-3">@nameof(myUser.Email)</th>
-                        <th scope="col" class="p-3">@nameof(myUser.PhoneNumber)</th>
-                        <th scope="col" class="p-3">Edit</th>
-                        <th scope="col" class="p-3">Delete</th>
+                        <th scope="row">@user.Id</th>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td><a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-sm">Edit</a></td>
+                        <td><a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a></td>
                     </tr>
-                </thead>
-                <tbody>
-
-                    @for (int i = 0; i < Model.Count; ++i)
-                    {
-                        User user = Model[i];
-                        <tr>
-                            <th scope="row" class="p-3">@user.Id</th>
-                            <td class="p-3">@user.FirstName</td>
-                            <td class="p-3">@user.LastName</td>
-                            <td class="p-3">@user.UserName</td>
-                            <td class="p-3">@user.Email</td>
-                            <td class="p-3">@user.PhoneNumber</td>
-                            <td class="p-3"><a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning">Edit</a></td>
-                            <td class="p-3"><a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a></td>
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    }
-    else
-    {
-        <p>Pacient table is empty!</p>
-    }
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p class="alert alert-info">Pacient table is empty!</p>
 }
 
 @section Scripts

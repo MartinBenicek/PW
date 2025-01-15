@@ -4,37 +4,42 @@
     <link rel="stylesheet" href="~/css/prohlidky.css" />
 }
 
-<a asp-action="Create" class="btn btn-info mb-3">Create lékařská zpráva</a>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Karta ID</th>
-            <th>Pacient ID</th>
-            <th>Lekarska Zpráva ID</th>
-            <th>Zpráva</th>
-            <th>Datum Napsání</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<h1>Administrace Zpráv</h1>
+
+<a asp-action="Create" class="btn btn-success my-3">Create lékařská zpráva</a>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
             <tr>
-                <td>@item.Karta.KartaId</td>
-                <td>@item.Karta.PacientId</td>
-                <td>@item.LekarskaZprava.LekarskaZpravaId</td>
-                <td>@item.LekarskaZprava.Zprava</td>
-                <td>@item.LekarskaZprava.Datum?.ToString("dd.MM.yyyy")</td>
-                <td><a asp-action="Edit" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-warning">Edit</a></td>
-                <td><a asp-action="Delete" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a></td>
+                <th>Karta ID</th>
+                <th>Pacient ID</th>
+                <th>Lekarska Zpráva ID</th>
+                <th>Zpráva</th>
+                <th>Datum Napsání</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Karta.KartaId</td>
+                    <td>@item.Karta.PacientId</td>
+                    <td>@item.LekarskaZprava.LekarskaZpravaId</td>
+                    <td>@item.LekarskaZprava.Zprava</td>
+                    <td>@item.LekarskaZprava.Datum?.ToString("dd.MM.yyyy")</td>
+                    <td><a asp-action="Edit" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-warning btn-sm">Edit</a></td>
+                    <td><a asp-action="Delete" asp-route-id="@item.LekarskaZprava.LekarskaZpravaId" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @section Scripts
-                {
+{
     <script src="~/js/site.js"></script>
     <script src="~/js/validations/FutureDate.js"></script>
 }

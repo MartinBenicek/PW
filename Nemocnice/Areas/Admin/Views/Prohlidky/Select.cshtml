@@ -1,13 +1,17 @@
 ﻿@model IList<Nemocnice.application.ViewModels.ProhlidkyViewModel>
+
 @section Styles
 {
     <link rel="stylesheet" href="~/css/prohlidky.css" />
 }
 
-<a asp-action="Create" class="btn btn-info mb-3">Create Prohlídka</a>
+<h1>Administrace Prohlídek</h1>
+
+<a asp-action="Create" class="btn btn-success my-3">Create Prohlídka</a>
+
 <div class="table-responsive">
-    <table class="table">
-        <thead>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
             <tr>
                 <th>Karta ID</th>
                 <th>Ordinace ID</th>
@@ -35,8 +39,8 @@
                     <td>@prohlidka.LekarskeSluzby.Vysetreni</td>
                     <td>@prohlidka.LekarskeSluzby.Ockovani</td>
                     <td>@prohlidka.LekarskeSluzby.Datum</td>
-                    <td><a asp-action="Edit" asp-route-id="@prohlidka.LekarskeSluzby.LekarskeSluzbyId" class="btn btn-warning">Edit</a></td>
-                    <td><a asp-action="Delete" asp-route-id="@prohlidka.LekarskeSluzby.LekarskeSluzbyId" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a></td>
+                    <td><a asp-action="Edit" asp-route-id="@prohlidka.LekarskeSluzby.LekarskeSluzbyId" class="btn btn-warning btn-sm">Edit</a></td>
+                    <td><a asp-action="Delete" asp-route-id="@prohlidka.LekarskeSluzby.LekarskeSluzbyId" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a></td>
                 </tr>
             }
         </tbody>
@@ -44,6 +48,6 @@
 </div>
 
 @section Scripts
-                    {
+{
     <script src="~/js/site.js"></script>
 }
