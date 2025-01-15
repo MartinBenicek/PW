@@ -92,7 +92,7 @@ namespace Nemocnice.application.Implementation
             var lekarskaZprava = new LekarskaZprava
             {
                 Zprava = viewModel.LekarskaZprava.Zprava,
-                Datum = viewModel.LekarskaZprava.Datum ?? DateTime.Now,
+                Datum = viewModel.LekarskaZprava.Datum,
                 KartaID = viewModel.Karta.KartaId
             };
 
@@ -127,7 +127,7 @@ namespace Nemocnice.application.Implementation
             if (zprava != null)
             {
                 zprava.Zprava = viewModel.LekarskaZprava.Zprava;
-                zprava.Datum = viewModel.LekarskaZprava.Datum ?? DateTime.MinValue;
+                zprava.Datum = viewModel.LekarskaZprava.Datum;
                 zprava.KartaID = viewModel.Karta.KartaId;
 
                 _context.LekarskaZprava.Update(zprava);

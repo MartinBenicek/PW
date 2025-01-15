@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nemocnice.domain.Validations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace Nemocnice.application.ViewModels
     {
         public int? LekarskaZpravaId { get; set; }
         public string? Zprava { get; set; }
-        public DateTime? Datum { get; set; }
+
+        [FutureDate]
+        public DateTime Datum { get; set; } = DateTime.Now;
         public int? KartaId { get; set; }
     }
 }

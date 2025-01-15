@@ -20,12 +20,12 @@ namespace Nemocnice.domain.Validations
                 }
                 else
                 {
-                    return new ValidationResult($"The {validationContext.MemberName} field must be today or a future date.");
+                    return new ValidationResult($"Pole {validationContext.DisplayName} musí být dnešní nebo budoucí datum.");
                 }
             }
             else
             {
-                throw new NotImplementedException($"The {nameof(FutureDateAttribute)} is not implemented for the type: {value.GetType()}");
+                throw new NotImplementedException($"Atribut {nameof(FutureDateAttribute)} není implementován pro typ: {value.GetType()}");
             }
         }
 
@@ -33,7 +33,7 @@ namespace Nemocnice.domain.Validations
         {
             if (!context.Attributes.ContainsKey("data-val"))
                 context.Attributes.Add("data-val", "true");
-            context.Attributes.Add("data-val-futuredate", $"The {context.ModelMetadata.Name} field must be today or a future date.");
+            context.Attributes.Add("data-val-futuredate", $"Pole {context.ModelMetadata.DisplayName ?? context.ModelMetadata.Name} musí být dnešní nebo budoucí datum.");
         }
     }
 }

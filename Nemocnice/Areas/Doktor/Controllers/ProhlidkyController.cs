@@ -33,5 +33,45 @@ namespace Nemocnice.Areas.Pacient.Controllers
             var prohlidky = _prohlidkyService.SelectForDoctor(doctorId);
             return View(prohlidky);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new ProhlidkyViewModel
+            {
+                Karta = new KartaViewModel(),
+                Ordinace = new OrdinaceViewModel(),
+                LekarskeSluzby = new LekarskeSluzbyViewModel()
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ProhlidkyViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Console.WriteLine($"Property: {state.Key}, Error: {error.ErrorMessage}");
+                    }
+                }
+                return View(viewModel); // Vrátí zpět formulář s chybami
+            }
+
+            try
+            {
+                _prohlidkyService.CreateProhlidka(viewModel);
+                return RedirectToAction(nameof(Index)); // Přesměrování na stránku pro doktora
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred while creating prohlidka: {ex.Message}");
+                ModelState.AddModelError("", $"Chyba při zpracování dat: {ex.Message}");
+                return View(viewModel);
+            }
+        }
     }
 }

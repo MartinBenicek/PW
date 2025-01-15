@@ -1,0 +1,45 @@
+﻿@model ProhlidkyViewModel
+
+<h2>Create Prohlidka</h2>
+
+<form asp-area="Doktor" asp-controller="Prohlidky" asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group my-3">
+        <label asp-for="Karta.KartaId"></label>
+        <input asp-for="Karta.KartaId" class="form-control" />
+        <span asp-validation-for="Karta.KartaId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Ordinace.OrdinaceId"></label>
+        <input asp-for="Ordinace.OrdinaceId" class="form-control" />
+        <span asp-validation-for="Ordinace.OrdinaceId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Ukon"></label>
+        <input asp-for="LekarskeSluzby.Ukon" class="form-control" />
+        <span asp-validation-for="LekarskeSluzby.Ukon" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Vysetreni"></label>
+        <input asp-for="LekarskeSluzby.Vysetreni" class="form-control" />
+        <span asp-validation-for="LekarskeSluzby.Vysetreni" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Ockovani"></label>
+        <input asp-for="LekarskeSluzby.Ockovani" class="form-control" />
+        <span asp-validation-for="LekarskeSluzby.Ockovani" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Datum"></label>
+        <input asp-for="LekarskeSluzby.Datum" class="form-control" type="datetime-local" value="@Model.LekarskeSluzby.Datum.ToString("yyyy-MM-ddTHH:mm")" />
+        <span asp-validation-for="LekarskeSluzby.Datum" class="text-danger"></span>
+    </div>
+
+    <a asp-action="Select" class="btn btn-primary">Back to List</a>
+    <button type="submit" class="btn btn-success">Create</button>
+</form>

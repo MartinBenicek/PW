@@ -30,6 +30,41 @@ namespace Nemocnice.Areas.Doktor.Controllers
         }
 
         [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new PredpisViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(PredpisViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Console.WriteLine($"Property: {state.Key}, Error: {error.ErrorMessage}");
+                    }
+                }
+                return View(viewModel); // Vrátí zpět formulář s chybami
+            }
+
+            try
+            {
+                _predpisService.CreatePredpis(viewModel);
+                return RedirectToAction(nameof(Index)); // Přesměrování na stránku pro doktora
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred while creating predpis: {ex.Message}");
+                ModelState.AddModelError("", $"Chyba při zpracování dat: {ex.Message}");
+                return View(viewModel);
+            }
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
             var doctorId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
