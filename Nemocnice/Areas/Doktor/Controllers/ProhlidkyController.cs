@@ -73,5 +73,41 @@ namespace Nemocnice.Areas.Pacient.Controllers
                 return View(viewModel);
             }
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var viewModel = _prohlidkyService.GetProhlidkaById(id);
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, ProhlidkyViewModel viewModel)
+        {
+            if (id != viewModel.LekarskeSluzby.LekarskeSluzbyId)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _prohlidkyService.UpdateProhlidka(viewModel);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, $"Došlo k chybě při aktualizaci záznamu: {ex.Message}");
+                }
+            }
+
+            return View(viewModel);
+        }
     }
 }

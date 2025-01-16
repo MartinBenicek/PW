@@ -5,13 +5,13 @@
     <link rel="stylesheet" href="~/css/prohlidky.css" />
 }
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
+<h1>Vaše Zprávy</h1>
+
+<div class="table-responsive mt-3">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
             <tr>
                 <th>Karta ID</th>
-                <th>Pacient ID</th>
-                <th>Lékařská zpráva ID</th>
                 <th>Zpráva</th>
                 <th>Datum</th>
             </tr>
@@ -21,8 +21,6 @@
             {
                 <tr>
                     <td>@zprava.Karta.KartaId</td>
-                    <td>@zprava.Karta.PacientId</td>
-                    <td>@zprava.LekarskaZprava.LekarskaZpravaId</td>
                     <td>@zprava.LekarskaZprava.Zprava</td>
                     <td>@zprava.LekarskaZprava.Datum</td>
                 </tr>
