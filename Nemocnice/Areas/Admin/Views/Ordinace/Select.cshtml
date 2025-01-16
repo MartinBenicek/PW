@@ -25,7 +25,11 @@
                 <td>@ordinace.Budova</td>
                 <td>@ordinace.Mistnost</td>
                 <td>@ordinace.DoktorId</td>
-                <td>@ordinace.Image</td>
+                <td>
+                    <a href="@ordinace.ImageSrc" target="_blank">
+                        <img src="@ordinace.ImageSrc" alt="Ordinace Image" style="max-width: 100px; max-height: 100px;" />
+                    </a>
+                </td>
                 <td>@ordinace.ImageSrc</td>
                 <td><a asp-action="Edit" asp-route-id="@ordinace.OrdinaceId" class="btn btn-warning btn-sm">Edit</a></td>
                 <td><a asp-action="Delete" asp-route-id="@ordinace.OrdinaceId" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a></td>

@@ -11,10 +11,12 @@ namespace Nemocnice.Areas.Admin.Controllers
     public class OrdinaceController : Controller
     {
         private readonly IOrdinaceService _ordinaceService;
+        private readonly IFileUploadService _fileUploadService;
 
-        public OrdinaceController(IOrdinaceService ordinaceService)
+        public OrdinaceController(IOrdinaceService ordinaceService, IFileUploadService fileUploadService)
         {
             _ordinaceService = ordinaceService;
+            _fileUploadService = fileUploadService;
         }
 
         public IActionResult Select()
@@ -35,6 +37,11 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (viewModel.Image != null)
+                {
+                    string imageSrc = _fileUploadService.FileUpload(viewModel.Image, Path.Combine("img", "ordinace"));
+                    viewModel.ImageSrc = imageSrc;
+                }
                 _ordinaceService.CreateOrdinace(viewModel);
                 return RedirectToAction(nameof(Select));
             }
@@ -58,6 +65,11 @@ namespace Nemocnice.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (viewModel.Image != null)
+                {
+                    string imageSrc = _fileUploadService.FileUpload(viewModel.Image, Path.Combine("img", "ordinace"));
+                    viewModel.ImageSrc = imageSrc;
+                }
                 _ordinaceService.UpdateOrdinace(viewModel);
                 return RedirectToAction(nameof(Select));
             }

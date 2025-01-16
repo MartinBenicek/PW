@@ -6,7 +6,7 @@ using Nemocnice.infrastructure.Database;
 namespace Nemocnice.application.Implementation
 {
    
-    public class OrdinaceAppService : IOrdinaceService
+public class OrdinaceAppService : IOrdinaceService
     {
         private readonly NemocniceDbContext _context;
         private readonly IFileUploadService _fileUploadService;
@@ -47,7 +47,8 @@ namespace Nemocnice.application.Implementation
             {
                 Budova = viewModel.Budova,
                 Mistnost = viewModel.Mistnost,
-                DoktorID = viewModel.DoktorId
+                DoktorID = viewModel.DoktorId,
+                ImageSrc = viewModel.ImageSrc
             };
 
             if (viewModel.Image != null)

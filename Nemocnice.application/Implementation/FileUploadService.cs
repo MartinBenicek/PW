@@ -15,7 +15,6 @@ namespace Nemocnice.application.Implementation
             string filePathOutput = String.Empty;
             var fileName = Path.GetFileNameWithoutExtension(fileToUpload.FileName);
             var fileExtension = Path.GetExtension(fileToUpload.FileName);
-            //var fileNameGenerated = Path.GetRandomFileName();
             var fileRelative = Path.Combine(folderNameOnServer, fileName + fileExtension);
             var filePath = Path.Combine(this.RootPath, fileRelative);
             Directory.CreateDirectory(Path.Combine(this.RootPath, folderNameOnServer));
@@ -23,7 +22,7 @@ namespace Nemocnice.application.Implementation
             {
                 fileToUpload.CopyTo(stream);
             }
-            filePathOutput = Path.DirectorySeparatorChar + fileRelative;
+            filePathOutput = "/" + fileRelative.Replace("\\", "/");
             return filePathOutput;
         }
     }
