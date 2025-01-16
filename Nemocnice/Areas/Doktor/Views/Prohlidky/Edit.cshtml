@@ -1,9 +1,10 @@
 ﻿@model ProhlidkyViewModel
 
-<h2 class="text-center my-4">Create Prohlídka</h2>
+<h2 class="text-center my-4">Edit Prohlídka</h2>
 
-<form asp-area="Admin" asp-controller="Prohlidky" asp-action="Create" method="post">
+<form asp-area="Doktor" asp-controller="Prohlidky" asp-action="Edit" method="post">
     @Html.AntiForgeryToken()
+    <input asp-for="LekarskeSluzby.LekarskeSluzbyId" type="hidden" />
     <div class="row mb-3">
         <div class="form-group my-3 col-md-6">
             <label asp-for="Karta.KartaId">Karta ID</label>
@@ -34,14 +35,12 @@
         <span asp-validation-for="LekarskeSluzby.Ockovani" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="LekarskeSluzby.Datum" class="control-label">Datum</label>
-        <input asp-for="LekarskeSluzby.Datum" class="form-control" type="datetime-local" value="@Model.LekarskeSluzby.Datum.ToString("yyyy-MM-ddTHH:mm")" />
+    <div class="form-group my-3">
+        <label asp-for="LekarskeSluzby.Datum"></label>
+        <input asp-for="LekarskeSluzby.Datum" class="form-control" />
         <span asp-validation-for="LekarskeSluzby.Datum" class="text-danger"></span>
     </div>
 
-    <div class="d-flex justify-content-between">
-        <a asp-action="Select" class="btn btn-primary">Back to List</a>
-        <button type="submit" class="btn btn-success">Create</button>
-    </div>
+    <a asp-action="Select" class="btn btn-primary">Back to List</a>
+    <button type="submit" class="btn btn-success">Edit</button>
 </form>

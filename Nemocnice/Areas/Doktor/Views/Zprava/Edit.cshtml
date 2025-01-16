@@ -1,0 +1,28 @@
+﻿@model KartaLekarskaZprava
+
+<h1 class="text-center my-4">Edit Zpráva</h1>
+
+<div class="container">
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="LekarskaZprava.LekarskaZpravaId" />
+        <div class="mb-3">
+            <label class="form-label" asp-for="Karta.KartaId">Karta ID</label>
+            <input class="form-control" asp-for="Karta.KartaId">
+            <span asp-validation-for="Karta.KartaId" class="text-danger"></span>
+        </div>
+        <div class="my-3">
+            <label class="form-label" asp-for="LekarskaZprava.Zprava">Zpráva</label>
+            <input class="form-control" asp-for="LekarskaZprava.Zprava">
+            <span asp-validation-for="LekarskaZprava.Zprava" class="text-danger"></span>
+        </div>
+        <div class="my-3">
+            <label asp-for="LekarskaZprava.Datum" class="control-label">Datum</label>
+            <input asp-for="LekarskaZprava.Datum" class="form-control" type="datetime-local" value="@Model.LekarskaZprava.Datum.ToString("yyyy-MM-ddTHH:mm")" />
+            <span asp-validation-for="LekarskaZprava.Datum" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a asp-action="Select" class="btn btn-primary">Back to List</a>
+            <button type="submit" class="btn btn-success ms-3">Save</button>
+        </div>
+    </form>
+</div>

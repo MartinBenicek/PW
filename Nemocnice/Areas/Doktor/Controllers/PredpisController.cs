@@ -65,11 +65,67 @@ namespace Nemocnice.Areas.Doktor.Controllers
         }
 
         [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var viewModel = _predpisService.GetPredpisById(id);
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, PredpisViewModel viewModel)
+        {
+            if (id != viewModel.Id)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _predpisService.UpdatePredpis(viewModel);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, $"Došlo k chybě při aktualizaci záznamu: {ex.Message}");
+                }
+            }
+
+            return View(viewModel);
+        }
+
+
+        [HttpGet]
         public IActionResult Index()
         {
             var doctorId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var predpisy = _predpisService.SelectForDoctor(doctorId);
             return View(predpisy);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _predpisService.DeletePredpis(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Došlo k chybě při mazání záznamu: {ex.Message}");
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
     }
 }
+

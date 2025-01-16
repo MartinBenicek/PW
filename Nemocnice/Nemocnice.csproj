@@ -31,4 +31,11 @@
     <None Include="wwwroot\img\obr3.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Areas\Doktor\Views\Prohlidky\Edit.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
