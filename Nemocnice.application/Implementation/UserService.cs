@@ -111,5 +111,22 @@ namespace Nemocnice.application.Implementation
                 KartaId = _context.Karta.Where(k => k.PacientID == u.Id).Select(k => (int?)k.Id).FirstOrDefault()
             }).ToList();
         }
+
+        public List<UserViewModel> GetPacientsWithKarta()
+        {
+            var pacientRoleId = _context.Roles.FirstOrDefault(r => r.Name == "Pacient")?.Id;
+            var pacientIds = _context.UserRoles.Where(ur => ur.RoleId == pacientRoleId).Select(ur => ur.UserId).ToList();
+
+            return _context.Users.Where(u => pacientIds.Contains(u.Id)).Select(u => new UserViewModel
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                UserName = u.UserName,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber,
+                KartaId = _context.Karta.Where(k => k.PacientID == u.Id).Select(k => (int?)k.Id).FirstOrDefault()
+            }).ToList();
+        }
     }
 }

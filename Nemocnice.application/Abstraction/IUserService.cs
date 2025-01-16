@@ -16,5 +16,6 @@ namespace Nemocnice.application.Abstraction
         bool Delete(int id);
         RegisterViewModel GetEditViewModel(int id);
         List<UserViewModel> GetUsersWithKarta();
+        List<UserViewModel> GetPacientsWithKarta();
     }
 }

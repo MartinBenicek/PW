@@ -1,0 +1,45 @@
+﻿@model IList<Nemocnice.application.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Seznam Pacientů";
+    UserViewModel myUser = new UserViewModel();
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Pacient ID</th>
+                    <th scope="col">Karta ID</th>
+                    <th scope="col">@nameof(myUser.FirstName)</th>
+                    <th scope="col">@nameof(myUser.LastName)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; ++i)
+                {
+                    UserViewModel user = Model[i];
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.KartaId</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p class="alert alert-info">Pacient table is empty!</p>
+}
+
+@section Scripts
+{
+    <script src="~/js/site.js"></script>
+}
