@@ -1,4 +1,6 @@
-﻿using Nemocnice.domain.Entities.Interfaces;
+﻿using Microsoft.AspNetCore.Http;
+using Nemocnice.domain.Entities.Interfaces;
+using Nemocnice.domain.Validations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +20,10 @@ namespace Nemocnice.domain.Entities
         public string? Budova { get; set; }
         [Required]
         public string? Mistnost { get; set; }
-
+        public string? ImageSrc { get; set; }
+        [NotMapped]
+        [FileContent("image")]
+        public IFormFile? Image { get; set; }
         [ForeignKey(nameof(Doktor))]
         public int DoktorID { get; set; }
     }

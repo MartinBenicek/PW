@@ -47,6 +47,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+builder.Services.AddScoped<IFileUploadService, FileUploadService>(serviceProvider => new FileUploadService(serviceProvider.GetService<IWebHostEnvironment>().WebRootPath));
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IKartaService, KartaService>();
 builder.Services.AddScoped<IProhlidkyService, ProhlidkyService>();

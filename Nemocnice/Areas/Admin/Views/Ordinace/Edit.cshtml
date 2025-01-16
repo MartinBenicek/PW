@@ -1,0 +1,41 @@
+﻿@model Nemocnice.application.ViewModels.OrdinaceViewModel
+
+<h2>Edit Ordinace</h2>
+
+<form asp-area="Admin" asp-controller="Ordinace" asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="OrdinaceId" type="hidden" />
+
+    <div class="form-group my-3">
+        <label asp-for="Budova"></label>
+        <input asp-for="Budova" class="form-control" />
+        <span asp-validation-for="Budova" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Mistnost"></label>
+        <input asp-for="Mistnost" class="form-control" />
+        <span asp-validation-for="Mistnost" class="text-danger"></span>
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="DoktorId"></label>
+        <input asp-for="DoktorId" class="form-control" />
+        <span asp-validation-for="DoktorId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image" class="control-label"></label>
+        <input asp-for="Image" type="file" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <a asp-action="Select" class="btn btn-primary">Back to List</a>
+    <button type="submit" class="btn btn-success">Edit</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
