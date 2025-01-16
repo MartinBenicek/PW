@@ -5,10 +5,13 @@
         <link rel="stylesheet" href="~/css/predpis.css" />
 }
 
-<a asp-action="Create" class="btn btn-info mb-3">Create předpis</a>
+<h1>Vaše předpisy</h1>
+
+
+<a asp-action="Create" class="btn btn-success my-3">Create předpis</a>
 <div class="table-responsive">
-    <table class="table">
-        <thead>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
             <tr>
                 <th>Předpis ID</th>
                 <th>Typ Léku</th>

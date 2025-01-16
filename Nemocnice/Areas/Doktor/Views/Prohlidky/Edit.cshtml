@@ -40,7 +40,8 @@
         <input asp-for="LekarskeSluzby.Datum" class="form-control" />
         <span asp-validation-for="LekarskeSluzby.Datum" class="text-danger"></span>
     </div>
-
-    <a asp-action="Select" class="btn btn-primary">Back to List</a>
-    <button type="submit" class="btn btn-success">Edit</button>
+    <div class="d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        <button type="submit" class="btn btn-success">Edit</button>
+	</div>
 </form>

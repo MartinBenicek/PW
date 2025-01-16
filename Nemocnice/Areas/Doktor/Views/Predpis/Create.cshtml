@@ -1,28 +1,34 @@
 ﻿@model Nemocnice.application.ViewModels.PredpisViewModel
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="TypLeku" class="control-label"></label>
-        <input asp-for="TypLeku" class="form-control" />
-        <span asp-validation-for="TypLeku" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="NazevLeku" class="control-label"></label>
-        <input asp-for="NazevLeku" class="form-control" />
-        <span asp-validation-for="NazevLeku" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CasPodani" class="control-label"></label>
-        <input asp-for="CasPodani" class="form-control" />
-        <span asp-validation-for="CasPodani" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LekarskaZpravaId" class="control-label"></label>
-        <input asp-for="LekarskaZpravaId" class="form-control" />
-        <span asp-validation-for="LekarskaZpravaId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
+<h2 class="text-center my-4">Create Předpis</h2>
 
+<div class="container">
+    <form asp-action="Create" method="post">
+        <div class="row mb-3">
+            <div class="form-group my-3 col-md-6">
+                <label asp-for="LekarskaZpravaId" class="control-label">Lékařská zpráva ID</label>
+                <input asp-for="LekarskaZpravaId" class="form-control" />
+                <span asp-validation-for="LekarskaZpravaId" class="text-danger"></span>
+            </div>
+            <div class="form-group my-3 col-md-6">
+                <label asp-for="TypLeku" class="control-label">Typ léku</label>
+                <input asp-for="TypLeku" class="form-control" />
+                <span asp-validation-for="TypLeku" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="NazevLeku" class="control-label">Název léku</label>
+            <input asp-for="NazevLeku" class="form-control" />
+            <span asp-validation-for="NazevLeku" class="text-danger"></span>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="CasPodani" class="control-label">Čas podání</label>
+            <input asp-for="CasPodani" class="form-control" />
+            <span asp-validation-for="CasPodani" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            <button type="submit" class="btn btn-success">Create</button>
+        </div>
+    </form>
+</div>

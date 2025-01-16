@@ -1,10 +1,15 @@
 ﻿@model Nemocnice.application.ViewModels.PredpisViewModel
 
-<h2 class="text-center my-4">Edit Predpis</h2>
+<h2 class="text-center my-4">Edit Předpis</h2>
 
 <div class="container">
     <form asp-action="Edit" method="post">
         <div class="row mb-3">
+            <div class="mb-3">
+                <label asp-for="LekarskaZpravaId" class="control-label">Lékařská Zpráva ID</label>
+                <input asp-for="LekarskaZpravaId" class="form-control" />
+                <span asp-validation-for="LekarskaZpravaId" class="text-danger"></span>
+            </div>
             <div class="mb-3">
                 <label asp-for="TypLeku" class="control-label">Typ Léku</label>
                 <input asp-for="TypLeku" class="form-control" />
@@ -19,11 +24,6 @@
                 <label asp-for="CasPodani" class="control-label">Čas Podání</label>
                 <input asp-for="CasPodani" class="form-control" />
                 <span asp-validation-for="CasPodani" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="LekarskaZpravaId" class="control-label">Lékařská Zpráva ID</label>
-                <input asp-for="LekarskaZpravaId" class="form-control" />
-                <span asp-validation-for="LekarskaZpravaId" class="text-danger"></span>
             </div>
         </div>
         <div class="d-flex justify-content-between">
