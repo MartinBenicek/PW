@@ -11,5 +11,6 @@ namespace Nemocnice.application.ViewModels
         public KartaViewModel Karta { get; set; }
         public OrdinaceViewModel Ordinace { get; set; }
         public LekarskeSluzbyViewModel LekarskeSluzby { get; set; }
+        public string? OrdinaceImageSrc { get; set; }
     }
 }

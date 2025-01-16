@@ -71,9 +71,6 @@ namespace Nemocnice.Areas.Admin.Controllers
         }
 
 
-
-
-
         [HttpGet]
         public IActionResult Edit(int id)
         {
