@@ -21,8 +21,8 @@ namespace Nemocnice.Areas.Admin.Controllers
         }
         public IActionResult Select()
         {
-            IList<User> user = _userAppService.Select();
-            return View(user);
+            List<UserViewModel> users = _userAppService.GetUsersWithKarta();
+            return View(users);
         }
 
         [HttpGet]

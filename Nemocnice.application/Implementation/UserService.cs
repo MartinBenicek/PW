@@ -11,17 +11,20 @@ using Nemocnice.domain.Entities.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Nemocnice.application.ViewModels;
 using Nemocnice.infrastructure.Identity.Enums;
+using Nemocnice.domain.Entities;
 
 namespace Nemocnice.application.Implementation
 {
     public class UserAppService : IUserAppService
     {
         private readonly UserManager<User> _userManager;
+        private readonly NemocniceDbContext _context;
 
 
-        public UserAppService(UserManager<User> userManager)
+        public UserAppService(UserManager<User> userManager, NemocniceDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public IList<User> Select()
@@ -30,23 +33,30 @@ namespace Nemocnice.application.Implementation
         }
         public bool Create(RegisterViewModel model)
         {
-
-
             var user = new User
             {
                 UserName = model.Username,
                 Email = model.Email,
-                PhoneNumber = model.Phone,
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                PhoneNumber = model.Phone
             };
 
             var result = _userManager.CreateAsync(user, model.Password).Result;
-            var roleResult = _userManager.AddToRoleAsync(user, Roles.Pacient.ToString()).Result;
-            if (result.Succeeded && roleResult.Succeeded)
+            if (result.Succeeded)
             {
+                _userManager.AddToRoleAsync(user, "Pacient").Wait();
+
+                var karta = new Karta
+                {
+                    PacientID = user.Id
+                };
+                _context.Karta.Add(karta);
+                _context.SaveChanges();
+
                 return true;
             }
+
             return false;
         }
         public bool Delete(int id)
@@ -86,6 +96,20 @@ namespace Nemocnice.application.Implementation
 
             var result = _userManager.UpdateAsync(user).Result;
             return result.Succeeded;
+        }
+
+        public List<UserViewModel> GetUsersWithKarta()
+        {
+            return _context.Users.Select(u => new UserViewModel
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                UserName = u.UserName,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber,
+                KartaId = _context.Karta.Where(k => k.PacientID == u.Id).Select(k => (int?)k.Id).FirstOrDefault()
+            }).ToList();
         }
     }
 }
