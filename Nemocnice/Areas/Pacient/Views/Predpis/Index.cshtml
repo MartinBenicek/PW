@@ -5,17 +5,16 @@
     <link rel="stylesheet" href="~/css/predpis.css" />
 }
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
+<h1>Vaše předpisy</h1>
+
+<div class="table-responsive mt-3">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
             <tr>
                 <th>Předpis ID</th>
                 <th>Typ Léku</th>
                 <th>Název Léku</th>
                 <th>Čas podání</th>
-                <th>Lékařská zpráva ID</th>
-                <th>Zpráva</th>
-                <th>Datum</th>
             </tr>
         </thead>
         <tbody>
@@ -26,9 +25,6 @@
                     <td>@predpis.Predpis.TypLeku</td>
                     <td>@predpis.Predpis.NazevLeku</td>
                     <td>@predpis.Predpis.CasPodani</td>
-                    <td>@predpis.LekarskaZprava.LekarskaZpravaId</td>
-                    <td>@predpis.LekarskaZprava.Zprava</td>
-                    <td>@predpis.LekarskaZprava.Datum</td>
                 </tr>
             }
         </tbody>
