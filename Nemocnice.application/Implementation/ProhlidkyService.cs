@@ -39,8 +39,10 @@ namespace Nemocnice.application.Implementation
                             OrdinaceId = ordinace.Id,
                             Budova = ordinace.Budova,
                             Mistnost = ordinace.Mistnost,
-                            DoktorId = ordinace.DoktorID
-                        }
+                            DoktorId = ordinace.DoktorID,
+                            ImageSrc = ordinace.ImageSrc
+                        },
+                        OrdinaceImageSrc = ordinace.ImageSrc
                     }).ToList();
         }
 
@@ -171,8 +173,10 @@ namespace Nemocnice.application.Implementation
                             OrdinaceId = ordinace.Id,
                             Budova = ordinace.Budova,
                             Mistnost = ordinace.Mistnost,
-                            DoktorId = ordinace.DoktorID
-                        }
+                            DoktorId = ordinace.DoktorID,
+                            ImageSrc = ordinace.ImageSrc
+                        },
+                        OrdinaceImageSrc = ordinace.ImageSrc
                     }).FirstOrDefault();
         }
 

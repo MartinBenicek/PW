@@ -9,6 +9,7 @@
             <tr>
                 <th>Karta ID</th>
                 <th>Ordinace ID</th>
+                <th>Obrázek</th>
                 <th>Budova</th>
                 <th>Místnost</th>
                 <th>Lékařské služby ID</th>
@@ -25,6 +26,9 @@
                 <tr>
                     <td>@prohlidka.Karta.KartaId</td>
                     <td>@prohlidka.Ordinace.OrdinaceId</td>
+                    <td>
+                        <img src="@prohlidka.OrdinaceImageSrc" alt="Ordinace Image" style="max-width: 100px; max-height: 100px;" />
+                    </td>
                     <td>@prohlidka.Ordinace.Budova</td>
                     <td>@prohlidka.Ordinace.Mistnost</td>
                     <td>@prohlidka.LekarskeSluzby.LekarskeSluzbyId</td>

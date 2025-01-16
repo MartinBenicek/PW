@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nemocnice.infrastructure.Database;
 
@@ -11,9 +12,11 @@ using Nemocnice.infrastructure.Database;
 namespace Nemocnice.infrastructure.Migrations
 {
     [DbContext(typeof(NemocniceDbContext))]
-    partial class NemocniceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250116190316_26th migration")]
+    partial class _26thmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,7 +326,6 @@ namespace Nemocnice.infrastructure.Migrations
                             Id = 1,
                             Budova = "A1",
                             DoktorID = 1,
-                            ImageSrc = "\\img\\ordinace\\ordinace A1.jpg",
                             Mistnost = "1/4"
                         },
                         new
@@ -331,7 +333,6 @@ namespace Nemocnice.infrastructure.Migrations
                             Id = 2,
                             Budova = "B1",
                             DoktorID = 2,
-                            ImageSrc = "\\img\\ordinace\\ordinace B1.jpg",
                             Mistnost = "2/3"
                         },
                         new
@@ -339,7 +340,6 @@ namespace Nemocnice.infrastructure.Migrations
                             Id = 3,
                             Budova = "C1",
                             DoktorID = 2,
-                            ImageSrc = "\\img\\ordinace\\ordinace C1.jpg",
                             Mistnost = "2/1"
                         });
                 });
