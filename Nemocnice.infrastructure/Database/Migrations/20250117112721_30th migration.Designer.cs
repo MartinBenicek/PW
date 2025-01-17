@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nemocnice.infrastructure.Database;
 
@@ -11,9 +12,11 @@ using Nemocnice.infrastructure.Database;
 namespace Nemocnice.infrastructure.Migrations
 {
     [DbContext(typeof(NemocniceDbContext))]
-    partial class NemocniceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250117112721_30th migration")]
+    partial class _30thmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,14 +219,14 @@ namespace Nemocnice.infrastructure.Migrations
                         {
                             Id = 1,
                             Datum = new DateTime(2025, 2, 10, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            KartaID = 3,
+                            KartaID = 1,
                             Zprava = "Pacient vykazuje známky zlepšení, doporučeno pokračovat v současné léčbě, kontrola za 14 dní."
                         },
                         new
                         {
                             Id = 2,
                             Datum = new DateTime(2025, 2, 10, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            KartaID = 3,
+                            KartaID = 2,
                             Zprava = "Pacientovi doporučeny Nasivin nosní kapky pro zmírnění ucpaného nosu. Aplikovat 1–2 kapky do každé nosní dírky maximálně 3× denně po dobu maximálně 7 dní. "
                         });
                 });
@@ -273,7 +276,7 @@ namespace Nemocnice.infrastructure.Migrations
                         {
                             Id = 2,
                             Datum = new DateTime(2025, 4, 25, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            KartaID = 3,
+                            KartaID = 1,
                             Ockovani = "Encefalitida",
                             OrdinaceID = 2,
                             Ukon = "Očkování",
@@ -283,7 +286,7 @@ namespace Nemocnice.infrastructure.Migrations
                         {
                             Id = 3,
                             Datum = new DateTime(2025, 5, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            KartaID = 3,
+                            KartaID = 2,
                             Ockovani = "",
                             OrdinaceID = 3,
                             Ukon = "Vyšetření",
