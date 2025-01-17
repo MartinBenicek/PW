@@ -36,8 +36,8 @@
         </div>
 
         <div class="form-group my-3">
-            <label asp-for="LekarskeSluzby.Datum">Datum</label>
-            <input asp-for="LekarskeSluzby.Datum" class="form-control" />
+            <label asp-for="LekarskeSluzby.Datum" class="control-label">Datum</label>
+            <input asp-for="LekarskeSluzby.Datum" class="form-control" type="datetime-local" value="@Model.LekarskeSluzby.Datum.ToString("yyyy-MM-ddTHH:mm")" />
             <span asp-validation-for="LekarskeSluzby.Datum" class="text-danger"></span>
         </div>
         <div class="d-flex justify-content-between">

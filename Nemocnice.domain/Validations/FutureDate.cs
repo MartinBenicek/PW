@@ -8,11 +8,7 @@ namespace Nemocnice.domain.Validations
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value == null)
-            {
-                return ValidationResult.Success;
-            }
-            else if (value is DateTime dateValue)
+            if (value is DateTime dateValue)
             {
                 if (dateValue.Date >= DateTime.Now.Date)
                 {
